@@ -1,0 +1,16 @@
+{
+  "domain": "regulatory.soc2",
+  "sources": [],
+  "payload": {
+    "type": "complianceChecklist",
+    "jurisdictionTags": ["US", "SOC2"],
+    "requirements": [
+      {"id": "CC6.1", "description": "Logical access controls", "isMandatory": true}
+    ],
+    "evidenceMapping": {
+      "type": "audit_trail",
+      "validationLogic": "query access logs for last 90 days"
+    }
+  },
+  "type": "complianceChecklist"
+}

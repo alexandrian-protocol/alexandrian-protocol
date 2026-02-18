@@ -1,0 +1,11 @@
+{
+  "type": "practice",
+  "domain": "software.patterns",
+  "sources": ["0x22539094b8913c9b4d0e5ca8288825afb1bae16f03348190d4bac7cb5af41cc9", "0xbf5f89f11a3c5ab40a4314ebc6d75227623ae8d1321fc67a76b183f4c90b4527"],
+  "payload": {
+    "type": "practice",
+    "rationale": "Same as sorted variant; parents in reverse order.",
+    "contexts": [],
+    "failureModes": []
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "practice",
+  "domain": "test",
+  "sources": ["0xcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"],
+  "payload": {
+    "type": "practice",
+    "rationale": "Invalid: parent not registered.",
+    "contexts": [],
+    "failureModes": []
+  }
+}

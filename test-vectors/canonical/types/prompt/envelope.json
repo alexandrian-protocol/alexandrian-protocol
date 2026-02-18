@@ -1,0 +1,11 @@
+{
+  "domain": "ai.prompting",
+  "sources": [],
+  "payload": {
+    "type": "promptEngineering",
+    "template": "Given context: {{context}}, produce a {{format}} response.",
+    "modelVersion": "gpt-4",
+    "evalCriteria": ["relevance", "conciseness"]
+  },
+  "type": "promptEngineering"
+}

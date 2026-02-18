@@ -1,0 +1,10 @@
+{
+  "type": "enhancement",
+  "domain": "software.observability",
+  "sources": ["0x20fdb96341faeb2aa530fa47a6cd9e74fb92aa5e2f31640ffaf5910f52b02aee"],
+  "payload": {
+    "type": "enhancement",
+    "concern": "observability",
+    "enhancedContent": "Use constant-time comparison with tracing spans for auth flow latency; emit metrics on token refresh success/failure."
+  }
+}

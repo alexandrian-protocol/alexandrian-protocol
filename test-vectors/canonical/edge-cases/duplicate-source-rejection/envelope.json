@@ -1,0 +1,1 @@
+{"type":"practice","domain":"test.edge","sources":["0x20fdb96341faeb2aa530fa47a6cd9e74fb92aa5e2f31640ffaf5910f52b02aee","0x20fdb96341faeb2aa530fa47a6cd9e74fb92aa5e2f31640ffaf5910f52b02aee"],"payload":{"type":"practice","rationale":"Invalid: same source listed twice.","contexts":[],"failureModes":[]}}

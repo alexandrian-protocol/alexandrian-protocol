@@ -1,0 +1,23 @@
+{
+  "name": "@alexandrian/sdk",
+  "version": "0.2.0",
+  "description": "Alexandrian Protocol — TypeScript SDK and CLI",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": { "alexandrian": "./dist/bin/run.js" },
+  "scripts": { "build": "tsc", "test": "vitest run" },
+  "dependencies": {
+    "@alexandrian/pipeline": "workspace:*",
+    "@alexandrian/protocol": "workspace:*",
+    "commander": "^11.0.0",
+    "ethers": "^6.8.0",
+    "node-fetch": "^3.3.0",
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^1.0.0"
+  }
+}

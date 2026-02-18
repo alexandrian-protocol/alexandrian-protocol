@@ -1,0 +1,1 @@
+{"compilerOptions":{"target":"ES2020","module":"ESNext","moduleResolution":"bundler","declaration":true,"outDir":"dist","rootDir":".","strict":true,"esModuleInterop":true,"skipLibCheck":true,"forceConsistentCasingInFileNames":true},"include":["index.ts","compiler/**/*.ts","storage/**/*.ts","compliance/**/*.ts"],"exclude":["node_modules","dist","**/*.test.ts"]}

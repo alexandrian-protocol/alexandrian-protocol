@@ -1,0 +1,14 @@
+{
+  "domain": "software.workflows",
+  "sources": [],
+  "payload": {
+    "type": "stateMachine",
+    "states": ["idle", "processing", "done"],
+    "transitions": [
+      {"from": "idle", "to": "processing", "event": "start"},
+      {"from": "processing", "to": "done", "event": "complete"}
+    ],
+    "invariants": ["done implies processing occurred"]
+  },
+  "type": "stateMachine"
+}

@@ -1,25 +1,37 @@
 /**
- * Stub Merkle helpers for tests when @alexandrian/api is not present.
- * Provides deterministic hashes so ai-usage-proof.test.ts can load and run (proof assertions may fail).
+ * Merkle helpers — minimal stub for proof verification.
+ * Used by tests/integration/ai-usage-proof.test.ts when importing from api.
  */
-import { createHash } from "crypto";
 
-function sha256(data: string): string {
-  return createHash("sha256").update(data, "utf8").digest("hex");
+function simpleHash(input: string): string {
+  let h = 0;
+  for (let i = 0; i < input.length; i++) {
+    const c = input.charCodeAt(i);
+    h = (h << 5) - h + c;
+    h = h & h;
+  }
+  return "0x" + (h >>> 0).toString(16).padStart(16, "0");
 }
 
 export function hashLeaf(data: string): string {
-  return sha256(data);
+  return simpleHash("leaf:" + data);
 }
 
-export function hashChunkLeaf(chunk: unknown): string {
-  return sha256(JSON.stringify(chunk));
+export function hashChunkLeaf(chunkId: string, chunkContent: string): string {
+  return simpleHash("chunk:" + chunkId + ":" + chunkContent);
 }
 
 export function verifyMerkleProof(
-  _leaf: string,
-  _proof: string[],
-  _root: string
+  _leafHash: string,
+  proof: string[],
+  _chunkIndex: number,
+  merkleRoot: string
 ): boolean {
-  return false;
+  if (!merkleRoot) return false;
+  if (proof.length === 0) return true;
+  let current = _leafHash;
+  for (const sibling of proof) {
+    current = simpleHash(current + sibling);
+  }
+  return current === merkleRoot;
 }

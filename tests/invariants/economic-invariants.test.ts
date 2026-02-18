@@ -11,7 +11,7 @@ import {
   meetsTier,
   computePayout,
   ledgerLeafHash,
-} from "../../packages/api/services/ledger.js";
+} from "./ledger.js";
 
 describe("Economic invariants", () => {
   describe("RS bounds (clampRS)", () => {
@@ -104,7 +104,8 @@ describe("Economic invariants", () => {
     it("rounds to 6 decimals", () => {
       const p = computePayout(1, 0.333333, 0.333333);
       const str = p.toString();
-      const dec = str.includes(".") ? str.split(".")[1]!.length : 0;
+      const frac = str.split(".")[1];
+      const dec = frac ? frac.length : 0;
       expect(dec).toBeLessThanOrEqual(6);
     });
   });

@@ -12,28 +12,25 @@ import request from "supertest";
 import { config } from "dotenv";
 import { resolve } from "path";
 
-// No real ETH: use mock registry for integration tests
-process.env.MOCK_REGISTRY = process.env.MOCK_REGISTRY ?? "1";
-process.env.RUN_ROYALTY_FLOW = process.env.RUN_ROYALTY_FLOW ?? "1";
-process.env.RUN_PAYMENT_FLOW = process.env.RUN_PAYMENT_FLOW ?? "1";
-// Hardhat test account #1 (for Flow 3 when MOCK_REGISTRY)
-if (process.env.MOCK_REGISTRY === "1" && !process.env.AGENT_WALLET) {
-  process.env.AGENT_WALLET = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8";
-  process.env.AGENT_PRIVATE_KEY =
-    "0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d1";
-}
-
 config({ path: resolve(process.cwd(), "packages/api/.env") });
 
 const VALID_CURATOR = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
 const VALID_AGENT = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8";
+const MOCK_REGISTRY = process.env.MOCK_REGISTRY ?? "1";
+const RUN_ROYALTY_FLOW = process.env.RUN_ROYALTY_FLOW ?? "1";
+const RUN_PAYMENT_FLOW = process.env.RUN_PAYMENT_FLOW ?? "1";
+const AGENT_WALLET = process.env.AGENT_WALLET ?? "0x70997970C51812dc3A010C7d01b50e0d17dc79C8";
+const AGENT_PRIVATE_KEY =
+  process.env.AGENT_PRIVATE_KEY ?? "0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d1";
 
 const hasStack =
-  (process.env.RUN_ROYALTY_FLOW === "1" || process.env.RUN_PAYMENT_FLOW === "1") &&
-  (process.env.MOCK_REGISTRY === "1" || (!!process.env.REGISTRY_ADDRESS && !!process.env.TOKEN_ADDRESS));
+  (RUN_ROYALTY_FLOW === "1" || RUN_PAYMENT_FLOW === "1") &&
+  (MOCK_REGISTRY === "1" || (!!process.env.REGISTRY_ADDRESS && !!process.env.TOKEN_ADDRESS));
 
+// Skipped in Milestone 1: depends on full API runtime.
+// Enabled in Milestone 2 when API layer is included.
 describe.sequential.skip("Flow 2 & 3: Full stack — requires API package (Milestone 2)", () => {
-  it.skipIf(!hasStack || process.env.RUN_ROYALTY_FLOW !== "1")(
+  it.skipIf(!hasStack || RUN_ROYALTY_FLOW !== "1")(
     "Flow 2: should ingest, query with ledger, and return payout/splits/rs/freshness",
     async () => {
       const { app } = await import("../../packages/api/server.js");
@@ -98,17 +95,12 @@ describe.sequential.skip("Flow 2 & 3: Full stack — requires API package (Miles
     { timeout: 20000 }
   );
 
-  it.skipIf(
-    !hasStack ||
-    process.env.RUN_PAYMENT_FLOW !== "1" ||
-    !process.env.AGENT_PRIVATE_KEY ||
-    !process.env.AGENT_WALLET
-  )(
+  it.skipIf(!hasStack || RUN_PAYMENT_FLOW !== "1" || !AGENT_PRIVATE_KEY || !AGENT_WALLET)(
     "Flow 3: should ingest, query with on-chain payment, and return paymentTxHash",
     async () => {
       const { app } = await import("../../packages/api/server.js");
-      const agentWallet = process.env.AGENT_WALLET!;
-      const agentPrivateKey = process.env.AGENT_PRIVATE_KEY!;
+      const agentWallet = AGENT_WALLET;
+      const agentPrivateKey = AGENT_PRIVATE_KEY;
 
       const ingestBody = {
         text: `Payment flow test. On-chain XANDER transfer from agent to curator.

@@ -10,11 +10,12 @@ import request from "supertest";
 import { config } from "dotenv";
 import { resolve } from "path";
 
-process.env.MOCK_REGISTRY = process.env.MOCK_REGISTRY ?? "1";
 config({ path: resolve(process.cwd(), "packages/api/.env") });
 
 const VALID_CURATOR = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
 
+// Skipped in Milestone 1: depends on full API runtime.
+// Enabled in Milestone 2 when API layer is included.
 describe.skip("Flow: Lineage traversal — requires API package (Milestone 2)", () => {
   it("returns parent for child and derived for parent via GET /api/lineage/:contentHash", async () => {
     const { app } = await import("../../packages/api/server.js");

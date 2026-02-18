@@ -60,7 +60,12 @@ export async function publishRegistryCommand(
   options: PublishRegistryOptions
 ): Promise<{ contentHash: string; txHash: string }> {
   const envelopeJson = await readFile(options.envelopePath, "utf-8");
-  const envelope = JSON.parse(envelopeJson) as Record<string, unknown>;
+  let envelope: Record<string, unknown>;
+  try {
+    envelope = JSON.parse(envelopeJson) as Record<string, unknown>;
+  } catch {
+    throw new Error(`Invalid JSON in envelope file: ${options.envelopePath}`);
+  }
 
   const contentHash = contentHashFromEnvelope(envelope);
   const contentHashHex = contentHash.startsWith("0x") ? contentHash : `0x${contentHash}`;

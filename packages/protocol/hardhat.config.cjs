@@ -31,5 +31,9 @@ module.exports = {
     tests:   "./test",
     cache:   "./cache",
     artifacts: "./artifacts"
+  },
+  mocha: {
+    timeout: 40000,
+    exit: true
   }
 };

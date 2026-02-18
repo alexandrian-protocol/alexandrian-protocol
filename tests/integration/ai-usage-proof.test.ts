@@ -15,9 +15,8 @@ import { describe, it, expect } from "vitest";
 import request from "supertest";
 import { config } from "dotenv";
 import { resolve } from "path";
-import { hashLeaf, hashChunkLeaf, verifyMerkleProof } from "../../packages/api/services/merkle.js";
+import { hashLeaf, hashChunkLeaf, verifyMerkleProof } from "./merkle.js";
 
-process.env.MOCK_REGISTRY = process.env.MOCK_REGISTRY ?? "1";
 config({ path: resolve(process.cwd(), "packages/api/.env") });
 
 const VALID_CURATOR = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
@@ -25,8 +24,10 @@ const VALID_AGENT = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8";
 
 const hasStack =
   process.env.RUN_AI_USAGE_PROOF === "1" &&
-  (process.env.MOCK_REGISTRY === "1" || (!!process.env.REGISTRY_ADDRESS && !!process.env.TOKEN_ADDRESS));
+  ((process.env.MOCK_REGISTRY ?? "1") === "1" || (!!process.env.REGISTRY_ADDRESS && !!process.env.TOKEN_ADDRESS));
 
+// Skipped in Milestone 1: depends on full API runtime.
+// Enabled in Milestone 2 when API layer is included.
 describe.skip("Flow: AI usage proof — requires API package (Milestone 2)", () => {
   it(
     "should return verifiable proof loop: merkleRoot, servedChunkHashes, receipt, balances",

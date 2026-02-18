@@ -13,10 +13,8 @@ export default defineConfig({
       "@alexandrian/protocol/core": resolve(__dirname, "packages/protocol/src/core/index.ts"),
       "@alexandrian/protocol/schema": resolve(__dirname, "packages/protocol/src/schema/index.ts"),
       "@alexandrian/pipeline": resolve(__dirname, "packages/pipeline"),
-      // Resolve api .js imports to .ts stubs when @alexandrian/api package is not present
+      // API server only — for integration tests that hit the runtime. Protocol core tests use local helpers (tests/invariants/ledger.ts, tests/integration/merkle.ts) and must not depend on api.
       "../../packages/api/server.js": resolve(__dirname, "packages/api/server.ts"),
-      "../../packages/api/services/merkle.js": resolve(__dirname, "packages/api/services/merkle.ts"),
-      "../../packages/api/services/ledger.js": resolve(__dirname, "packages/api/services/ledger.ts"),
     },
   },
 });

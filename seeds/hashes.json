@@ -1,0 +1,22 @@
+{
+  "software.security/practice-constant-time-comparison": "0x08cf1986678b5cc57743c44f55e9bbb536dc0c2abbd77eca8aa2134cb1c999f2",
+  "software.security/practice-token-rotation": "0xe5698ce93c0fbbd2f6b23a18f335ed978750cc112edcc64d8d1ec8761a549bc2",
+  "software.security/practice-rate-limiting": "0x2ddc4f65486df9a7c827d668a01fe832c731767bf932239ce090275f1a6f539b",
+  "software.security/practice-input-validation": "0x0bd7c20d0fdccdc54e8b7cfd8e6d7ca06dc2be65e6de95652790347a1c670b46",
+  "software.security/practice-secrets-management": "0xda0375504c8bfbb9fafa1246e0815b55a996700124e83233366ca2d86a09bbaf",
+  "software.security/state-machine-auth-flow": "0x63aa7950e8cd12d7897ab1d23a7a159611294917b9dce8411fa8fc16f8113fb8",
+  "software.security/state-machine-token-lifecycle": "0x2c9076eb32445e1e84808e4708d75c87aba3298f433e71afd7dc9c3431f3afb2",
+  "software.security/compliance-owasp-top10": "0x6116c568d2ce7bf92ee562577d9cd9536b57e5061ab649695d2d434336da5e77",
+  "software.security/compliance-jwt-rfc7519": "0xacab89bc657573301bd3b5c932edf79d87cec75303a44d3d4a24f60bd024315f",
+  "software.security/synthesis-secure-api-design": "0xd15ce1fd862c9fd81a5482a24fafc744367d58b33f2c1ad8c5ac30a29479d7c7",
+  "software.security/synthesis-auth-patterns": "0xba5720bca05049ce41477c90f4dbe33eb5f7c3f59714f71e4a7ca42393965f5f",
+  "software.patterns/practice-retry-exponential-backoff": "0x6b0c699cde09242fe1bf774335bc19677f6a68c5063ecd94916e394677641d1f",
+  "software.patterns/practice-circuit-breaker": "0x1dda3bf901b28ef174e06735497848a8dd888511acf29eb1cb2b72c756cd47db",
+  "software.patterns/pattern-webhook-delivery": "0xca40c8c26282f830571e0b467c7603981b0e26fb4569d91e504bfc5b03983812",
+  "software.patterns/pattern-idempotency-key": "0xb03650584afe42b8d554cf8e4f847c8a00984f6bbb761b9fe438518ac0417675",
+  "software.patterns/adaptation-retry-to-queue": "0x47248f2c72ad0c298ef506c1e22bf5d42c4bd65e8f8f378050a3c15717e4e876",
+  "software.patterns/enhancement-circuit-breaker-observability": "0x1bd793617bf31da3f11b3b3fe9c724819590c020914e9a54fd2ddfa261a35a79",
+  "meta.alexandria/practice-kb-authoring": "0xdc1027d4ab5625e78a7d20eaf0a17eccb773eca951f2c8550a047d68d0b3e80d",
+  "meta.alexandria/practice-domain-taxonomy": "0x5ebbbe22045bf74fb4fb361efde935a113a3222e75d2c48c979562679d2dd268",
+  "meta.alexandria/synthesis-knowledge-economy-intro": "0x1c90ab1e60e4ed3cf38c822586cb03dd8af26ac47b5166cf047e23a95850b812"
+}

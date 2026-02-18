@@ -1,45 +1,47 @@
 /**
- * Ledger math stub for economic-invariants tests when @alexandrian/api is not present.
- * Implements the contract asserted by tests/invariants/economic-invariants.test.ts.
+ * Ledger math for economic invariants — pure functions.
+ * Used by tests/invariants/economic-invariants.test.ts when importing from api.
  */
-import { createHash } from "crypto";
 
 export const RS_MIN = 0;
-export const RS_MAX = 2;
-
-const HALF_LIFE_DAYS = 30;
-const DECAY_PER_DAY = Math.pow(0.5, 1 / HALF_LIFE_DAYS);
+export const RS_MAX = 3;
 
 export function clampRS(rs: number): number {
-  if (rs < RS_MIN) return RS_MIN;
-  if (rs > RS_MAX) return RS_MAX;
-  return rs;
+  return Math.max(RS_MIN, Math.min(RS_MAX, rs));
 }
 
-export function freshnessMultiplier(createdAtIso: string): number {
-  const created = new Date(createdAtIso).getTime();
+const HALF_LIFE_DAYS = 30;
+
+export function freshnessMultiplier(isoDate: string): number {
+  const then = new Date(isoDate).getTime();
   const now = Date.now();
-  const daysAgo = (now - created) / (24 * 60 * 60 * 1000);
+  const daysAgo = (now - then) / (24 * 60 * 60 * 1000);
   if (daysAgo <= 0) return 1;
-  const f = Math.pow(DECAY_PER_DAY, daysAgo);
-  return Math.min(1, Math.max(0, f));
+  return Math.pow(0.5, daysAgo / HALF_LIFE_DAYS);
 }
-
-const TIER_RS: Record<number, number> = { 0: 0, 1: 0.5, 2: 1, 3: 2 };
 
 export function meetsTier(rs: number, tier: number): boolean {
-  const min = TIER_RS[tier] ?? 0;
-  return rs >= min;
+  if (tier === 0) return true;
+  if (tier === 1) return rs >= 0.5;
+  if (tier === 2) return rs >= 1.0;
+  if (tier === 3) return rs >= 2.0;
+  return false;
 }
 
 export function computePayout(base: number, rs: number, freshness: number): number {
-  const r = clampRS(rs);
-  const p = base * r * freshness;
-  const rounded = Math.round(p * 1e6) / 1e6;
+  const clamped = clampRS(rs);
+  const raw = base * clamped * freshness;
+  const rounded = Math.round(raw * 1e6) / 1e6;
   return Math.max(0, rounded);
 }
 
 export function ledgerLeafHash(contentHash: string, amount: number): string {
-  const data = JSON.stringify({ contentHash, amount });
-  return createHash("sha256").update(data, "utf8").digest("hex");
+  const data = contentHash + ":" + amount;
+  let h = 0;
+  for (let i = 0; i < data.length; i++) {
+    const c = data.charCodeAt(i);
+    h = (h << 5) - h + c;
+    h = h & h;
+  }
+  return "0x" + (h >>> 0).toString(16);
 }

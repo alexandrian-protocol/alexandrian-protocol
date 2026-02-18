@@ -17,7 +17,15 @@ export async function verifyCommand(options: VerifyOptions): Promise<boolean> {
   }
 
   const expectedJson = await readFile(options.expectedPath, "utf-8");
-  const expected = JSON.parse(expectedJson) as { contentHash?: string };
+  let expected: { contentHash?: string };
+  try {
+    expected = JSON.parse(expectedJson) as { contentHash?: string };
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error("Error: Invalid JSON in expected file:", options.expectedPath, msg);
+    process.exitCode = 1;
+    return false;
+  }
   const expectedHash = expected.contentHash;
   if (!expectedHash) {
     console.error("Error: expected file must contain contentHash");

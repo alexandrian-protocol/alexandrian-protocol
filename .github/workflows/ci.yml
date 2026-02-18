@@ -25,14 +25,20 @@ jobs:
           node-version: "20"
           cache: "pnpm"
 
-      - name: Install dependencies
+      - name: pnpm install
         run: pnpm install --frozen-lockfile
 
-      - name: Build
+      - name: pnpm build
         run: pnpm build
 
-      - name: Run package tests
-        run: pnpm test
-
-      - name: Run unit (spec) tests
+      - name: pnpm test:spec
         run: pnpm test:spec
+
+      - name: pnpm test:invariants
+        run: pnpm test:invariants
+
+      - name: pnpm test:integration
+        run: pnpm test:integration:ci
+
+      - name: pnpm test:protocol
+        run: pnpm test:protocol

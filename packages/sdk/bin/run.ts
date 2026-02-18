@@ -47,12 +47,19 @@ function createSDK(): { sdk: AlexandrianSDK; explorerUrl?: string } {
   const registryAddress = program.opts().registry ?? process.env.REGISTRY_ADDRESS;
   const explorerUrl = program.opts().explorerUrl ?? process.env.CHAIN_EXPLORER_URL;
 
+  if (!privateKey) {
+    throw new Error("Missing privateKey. Set PRIVATE_KEY or DEPLOYER_PRIVATE_KEY, or pass --private-key.");
+  }
+  if (!registryAddress) {
+    throw new Error("Missing registryAddress. Set REGISTRY_ADDRESS or pass --registry.");
+  }
+
   const provider = new ethers.JsonRpcProvider(rpcUrl);
-  const signer = new ethers.Wallet(privateKey!, provider);
+  const signer = new ethers.Wallet(privateKey, provider);
   const sdk = new AlexandrianSDK({
     provider,
     signer,
-    registryAddress: registryAddress!,
+    registryAddress,
   });
   return { sdk, explorerUrl };
 }
@@ -65,13 +72,17 @@ program
   .option("--query-fee <wei>", "Query fee in wei", "0")
   .action(async (envelopePath: string, opts: { stake: string; parent: string[]; queryFee: string }) => {
     try {
+      if (opts.parent && opts.parent.length === 0) {
+        throw new Error("Parent count must be > 0 when using --parent.");
+      }
       const { sdk, explorerUrl } = createSDK();
       const stakeWei = BigInt(opts.stake);
       const queryFeeWei = BigInt(opts.queryFee);
-      const parents = opts.parent?.length
-        ? opts.parent.map((hash, i) => ({
+      const parentList = opts.parent ?? [];
+      const parents = parentList.length > 0
+        ? parentList.map((hash) => ({
             parentHash: hash,
-            royaltyShareBps: Math.floor(10000 / opts.parent!.length),
+            royaltyShareBps: Math.floor(10000 / parentList.length),
           }))
         : undefined;
 
@@ -84,11 +95,37 @@ program
       });
     } catch (e) {
       const msg = e instanceof Error ? e.message : String(e);
-      if (msg.includes("missing") || msg.includes("required") || msg.includes("not set")) {
-        console.error("Error:", msg);
-      } else {
-        console.error("Error:", msg);
+      console.error("Error:", msg);
+      process.exitCode = 1;
+    }
+  });
+
+program
+  .command("query <search-text>")
+  .description("Query the archive by intent; optional --domain to filter")
+  .option("--domain <domain>", "Filter by domain (e.g. software.security)")
+  .action(async (searchText: string, opts: { domain?: string }) => {
+    try {
+      const { sdk } = createSDK();
+      const signer = (sdk as unknown as { signer?: { getAddress: () => Promise<string> } }).signer;
+      const agentAddress = signer ? await signer.getAddress() : "0x0000000000000000000000000000000000000000";
+      const result = await sdk.query({
+        intent: searchText,
+        domain: opts.domain,
+        agentAddress,
+      });
+      if (!result) {
+        console.log("No matching KB found.");
+        return;
       }
+      const m = result.match;
+      console.log("Match:", m.contentHash);
+      console.log("  curator:", m.kb.curator);
+      console.log("  domain:", m.kb.domain);
+      console.log("  queryFee (wei):", m.kb.queryFee.toString());
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e);
+      console.error("Error:", msg);
       process.exitCode = 1;
     }
   });
@@ -186,11 +223,12 @@ program
 program
   .command("settle <contentHash>")
   .description("Settle a citation (pay KB query fee in ETH). Signer must have enough ETH.")
-  .action(async (contentHash: string) => {
+  .option("--agent <address>", "Querier address to record (default: signer address)")
+  .action(async (contentHash: string, opts: { agent?: string }) => {
     try {
       const { sdk, explorerUrl } = createSDK();
       const signer = (sdk as unknown as { signer?: { getAddress: () => Promise<string> } }).signer;
-      const agentAddress = signer ? await signer.getAddress() : "";
+      const agentAddress = opts.agent ?? (signer ? await signer.getAddress() : "");
       const result = await sdk.settleCitation(contentHash, agentAddress);
       console.log("Settled.");
       console.log("  contentHash:", contentHash);

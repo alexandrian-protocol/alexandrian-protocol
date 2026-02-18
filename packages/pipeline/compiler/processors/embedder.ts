@@ -199,6 +199,12 @@ export function createEmbedder(): Embedder {
 
   if (override === 'stub')  return new StubEmbedder();
   if (override === 'local') return new LocalEmbedder(process.env.OLLAMA_URL);
+  if (override === 'openai' && !process.env.OPENAI_API_KEY) {
+    throw new Error('EMBEDDER=openai requires OPENAI_API_KEY. Set OPENAI_API_KEY in .env or environment.');
+  }
+  if (override === 'cohere' && !process.env.COHERE_API_KEY) {
+    throw new Error('EMBEDDER=cohere requires COHERE_API_KEY. Set COHERE_API_KEY in .env or environment.');
+  }
 
   if (process.env.OPENAI_API_KEY)  return new OpenAIEmbedder();
   if (process.env.COHERE_API_KEY)  return new CohereEmbedder();

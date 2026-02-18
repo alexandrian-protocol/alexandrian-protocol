@@ -170,12 +170,13 @@ async function main() {
   console.log(`  CHAIN_EXPLORER_URL=  # optional; e.g. https://sepolia.basescan.org for Base Sepolia\n`);
 }
 
-main()
-  .then(() => {
+(async () => {
+  try {
+    await main();
     // Brief delay to let RPC connection close cleanly (avoids Node/libuv crash on Windows)
     setTimeout(() => process.exit(0), 500);
-  })
-  .catch((err) => {
+  } catch (err) {
     console.error(err);
     process.exit(1);
-  });
+  }
+})();

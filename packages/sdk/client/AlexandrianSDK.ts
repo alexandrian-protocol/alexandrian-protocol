@@ -45,6 +45,9 @@ import {
 } from "@alexandrian/protocol/core";
 import type { DerivedEnvelopeInput } from "@alexandrian/protocol/core";
 
+/** One-time deprecation warnings (runtime) so callers see them without relying on IDE JSDoc. */
+const deprecationWarned = new Set<string>();
+
 // ─────────────────────────────────────────────────────────────────────────────
 // ABI — matches AlexandrianRegistry (Registry.sol) exactly
 // ─────────────────────────────────────────────────────────────────────────────
@@ -453,10 +456,11 @@ export class AlexandrianSDK {
 
     const receipt = await tx.wait();
     if (!receipt) throw new Error("No receipt");
+    const txHash = receipt.hash;
 
     return {
       contentHash: args.contentHash,
-      txHash: receipt.hash,
+      txHash,
       blockNumber: receipt.blockNumber,
       curator: curatorAddress,
       kbType: block.type,
@@ -484,6 +488,10 @@ export class AlexandrianSDK {
     const h = contentHash.startsWith("0x") ? contentHash : "0x" + contentHash;
 
     const sources = envelope.sources;
+    if (options.parentWeights !== undefined && !deprecationWarned.has("parentWeights")) {
+      deprecationWarned.add("parentWeights");
+      console.warn("[@alexandrian/sdk] parentWeights is deprecated; use sourceWeights.");
+    }
     const weights = options.sourceWeights ?? options.parentWeights ?? sources.map(() => 1);
     const totalWeight = weights.reduce((a: number, b: number) => a + b, 0) || 1;
     const maxBps = 9800;
@@ -518,10 +526,11 @@ export class AlexandrianSDK {
 
     const receipt = await tx.wait();
     if (!receipt) throw new Error("No receipt");
+    const txHash = receipt.hash;
 
     return {
       contentHash: h,
-      txHash: receipt.hash,
+      txHash,
       blockNumber: receipt.blockNumber,
       curator: curatorAddress,
       kbType: envelope.payload.type as unknown as KBType,
@@ -645,8 +654,9 @@ export class AlexandrianSDK {
     const protocolFee =
       settled && settled.args ? BigInt(settled.args[3] ?? 0) : 0n;
 
+    const txHash = receipt.hash;
     return {
-      txHash: receipt.hash,
+      txHash,
       contentHash,
       querier: agentAddress,
       totalFee,
@@ -656,6 +666,10 @@ export class AlexandrianSDK {
 
   /** @deprecated Use settleCitation */
   async settle(contentHash: string, agentAddress: string): Promise<SettleResult> {
+    if (!deprecationWarned.has("settle")) {
+      deprecationWarned.add("settle");
+      console.warn("[@alexandrian/sdk] settle() is deprecated; use settleCitation().");
+    }
     return this.settleCitation(contentHash, agentAddress);
   }
 
@@ -674,21 +688,24 @@ export class AlexandrianSDK {
     if (!this.signer) throw new Error("Signer required");
     const tx = await this.registry.addStake(contentHash, { value: amount });
     const receipt = await tx.wait();
-    return receipt!.hash;
+    if (!receipt) throw new Error("No receipt");
+    return receipt.hash;
   }
 
   async withdrawStake(contentHash: string): Promise<string> {
     if (!this.signer) throw new Error("Signer required");
     const tx = await this.registry.withdrawStake(contentHash);
     const receipt = await tx.wait();
-    return receipt!.hash;
+    if (!receipt) throw new Error("No receipt");
+    return receipt.hash;
   }
 
   async endorse(contentHash: string): Promise<string> {
     if (!this.signer) throw new Error("Signer required");
     const tx = await this.registry.endorse(contentHash);
     const receipt = await tx.wait();
-    return receipt!.hash;
+    if (!receipt) throw new Error("No receipt");
+    return receipt.hash;
   }
 
   async getKB(contentHash: string): Promise<OnChainKB> {

@@ -69,9 +69,12 @@ async function main() {
   console.log("\n  For subgraph/subgraph.yaml, set source.address and startBlock.\n");
 }
 
-main()
-  .then(() => setTimeout(() => process.exit(0), 500))
-  .catch((err) => {
+(async () => {
+  try {
+    await main();
+    setTimeout(() => process.exit(0), 500);
+  } catch (err) {
     console.error(err);
     process.exit(1);
-  });
+  }
+})();

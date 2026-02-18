@@ -21,6 +21,8 @@ const hasStack =
   !!process.env.AGENT_WALLET;
 
 describe("Flow 3: Payment", () => {
+  // Skipped in Milestone 1: depends on full API runtime.
+  // Enabled in Milestone 2 when API layer is included.
   it.skip(
     "use flow-2-3-fullstack.test.ts for full-stack runs",
     async () => {

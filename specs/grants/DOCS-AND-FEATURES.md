@@ -40,20 +40,21 @@ One flow: `pnpm install && pnpm build && pnpm demo` then `pnpm test:spec` or `pn
 
 ---
 
-## Not needed for grant reviewee
+## Not needed for grant reviewee to *read*
 
-These are internal, M2+, or contributor-focused. A reviewee does **not** need to read or run them to evaluate M1.
+These are internal, M2+, or contributor-focused. A reviewee does **not** need to read them to evaluate M1.  
+**Note:** `packages/pipeline` and `packages/api` are still **required in the repo** — SDK, demo, and integration tests import them; build and `pnpm verify` need them. Only the *review focus* is M1 (protocol + sdk + subgraph + seeds).
 
-| Item | Why not needed |
-|------|----------------|
+| Item | Why not needed to read |
+|------|------------------------|
 | **specs/m2/** | M2 grant narrative, ERC stack, roadmap, demo video script — post-M1. |
 | **specs/grants/** deep dive | COMMANDS + README + M1-DEMO + REVIEW is enough; AUDIT-READINESS is optional. |
 | **specs/THREAT-MODEL.md** | Internal/audit prep; not required to judge M1. |
 | **specs/SHARP-EDGES.md** | Contributor/implementation notes. |
 | **CONTRIBUTING.md** | For contributors, not reviewers. |
 | **TESTS.md** | Detailed test layout; reviewee runs `pnpm verify` / `pnpm test`, no need to read this. |
-| **packages/api** | Not M1 (README says so); API layer is M2+. |
-| **packages/pipeline** | Not M1; pipeline/runtime is M2+. |
+| **packages/api** | API layer is M2+ *focus*; kept for integration tests that hit the server. |
+| **packages/pipeline** | Pipeline/runtime is M2+ *focus*; kept for SDK and demo/ingestion tests. |
 | **docker/** | Supporting; optional for local full stack. |
 | **packages/protocol/contracts/m2/** | M2 contract stubs (KBStaking, EIP-712, etc.). |
 | **subgraph/m2/** | M2 schema/mapping snippets. |

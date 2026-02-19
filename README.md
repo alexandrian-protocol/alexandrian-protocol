@@ -4,7 +4,7 @@ A deterministic knowledge protocol with on-chain provenance and atomic royalty s
 
 ---
 
-## Start here
+## Start Here
 
 **Dependencies:** Node 20 · pnpm  
 (Details: [specs/TROUBLESHOOTING.md](specs/TROUBLESHOOTING.md))

@@ -1,6 +1,5 @@
 # Alexandria
 
-[![CI](https://github.com/alexandrian-protocol/alexandrian-protocol/actions/workflows/ci.yml/badge.svg)](https://github.com/alexandrian-protocol/alexandrian-protocol/actions/workflows/ci.yml)
 
 **Alexandria** is the monorepo for the **Alexandrian Protocol**: deterministic, content-addressed knowledge infrastructure for AI agents. Canonical KBs (JCS/CIDv1), VirtualRegistry, Solidity contracts (KnowledgeRegistry), subgraph, SDK, and seeds.
 

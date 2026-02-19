@@ -1,3 +1,3 @@
-export * from "./filecoin/client.js";
-export * from "./ipfs/pinner.js";
-export * from "./cache/index.js";
+export * from "./filecoin/client";
+export * from "./ipfs/pinner";
+export * from "./cache/index";

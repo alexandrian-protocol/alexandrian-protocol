@@ -62,7 +62,43 @@ Details: [specs/m2/](specs/m2/) — future work only; nothing in M2 is required 
 
 ## Dependencies
 
-**Node.js 20 LTS** (see [.nvmrc](.nvmrc)). **pnpm** (see `packageManager` in [package.json](package.json)).
+- **Node.js 20 LTS** — [.nvmrc](.nvmrc) (CI and local use the same).
+- **pnpm** — version from `packageManager` in [package.json](package.json) (e.g. `pnpm@9.0.0`). Install via [Corepack](https://nodejs.org/api/corepack.html) (`corepack enable` then `pnpm install`) or `npm install -g pnpm`.
+
+---
+
+## Setup (clone and install)
+
+From a clean clone:
+
+```bash
+git clone https://github.com/alexandrian-protocol/alexandrian-protocol.git
+cd alexandrian-protocol
+```
+
+Use Node 20 (optional if already on 20):
+
+```bash
+nvm use    # if using nvm and .nvmrc is present
+# or: fnm use / volta use / etc.
+```
+
+Install dependencies and build:
+
+```bash
+pnpm install
+pnpm build
+```
+
+Run the demo or full verification:
+
+```bash
+pnpm demo
+# or full check (install + build + tests + demo):
+pnpm verify
+```
+
+All scripts (build, test, deploy) are in [package.json](package.json); reviewer copy-paste: [specs/grants/COMMANDS.md](specs/grants/COMMANDS.md).
 
 ---
 

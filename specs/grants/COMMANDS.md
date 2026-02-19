@@ -1,5 +1,17 @@
 # Copy-paste commands (run from repo root)
 
+| Command | What it runs |
+|---------|----------------|
+| `pnpm verify` | Full suite: install, build, contract tests, spec tests, integration tests, demo (one shot). Implemented in [scripts/run-m1-verification.mjs](../../scripts/run-m1-verification.mjs). |
+| `pnpm demo:walkthrough` | Verbose walkthrough for reviewers; plain-language output (no dots). Run after `pnpm install`; script runs build first. |
+| `pnpm install && pnpm build && pnpm demo` | Get started: install, build, then run demo. |
+| `pnpm test:spec` | Unit + invariants + M1 demo test. |
+| `pnpm test:protocol` | Hardhat contract tests. |
+| `pnpm test:integration` | Integration tests (testnet smoke, subgraph, etc.). |
+| `pnpm test` | test:protocol + test:spec + test:integration. |
+
+---
+
 ## Clean M1 verification
 
 Section headers + minimal output (dot reporters).

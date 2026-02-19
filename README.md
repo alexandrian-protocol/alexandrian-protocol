@@ -30,6 +30,8 @@ Milestone 1 established deterministic Knowledge Block identity, on-chain registr
 | RoyaltyDAG routes upstream payments | Derivations correctly split and route royalties | `pnpm test:protocol` |
 | Invalid schema, cycles, duplicates rejected | Structural integrity and graph safety enforced | `pnpm test:spec` |
 | Lineage queryable via subgraph | Knowledge graph externally indexable and composable | [subgraph/](subgraph/README.md) |
+| Full verification (install, build, all tests, demo) | One command runs the complete M1 check | `pnpm verify` |
+| Verbose walkthrough | Human-readable demo for reviewers | `pnpm demo:walkthrough` |
 
 ---
 

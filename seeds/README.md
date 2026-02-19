@@ -4,7 +4,7 @@ Real knowledge content that populates the Alexandrian archive for demos, grant r
 
 **Not test vectors.** Test vectors (`test-vectors/canonical/`) are synthetic and determinism-focused. Seeds are real KBs that tell a coherent story.
 
-See [docs/TEST-VECTORS-AND-SEEDS.md](../docs/TEST-VECTORS-AND-SEEDS.md) for the full spec.
+See [specs/serialization-test-vectors.md](../specs/serialization-test-vectors.md) for the full spec.
 
 ## Structure
 
@@ -37,4 +37,4 @@ node scripts/seed-compute-hashes.mjs
 
 ## Usage
 
-Use `@alexandrian/protocol` `contentHashFromEnvelope(envelope)` to verify hashes. For on-chain registration, run the seed script (see `scripts/` or `docs/DEMO_STEPS.md`).
+Use `@alexandrian/protocol` `contentHashFromEnvelope(envelope)` to verify hashes. For on-chain registration, run the seed script (see [scripts/README.md](../scripts/README.md)).

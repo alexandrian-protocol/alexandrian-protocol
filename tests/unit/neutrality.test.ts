@@ -2,7 +2,7 @@
  * Protocol Neutrality — verify no privileged curator logic
  *
  * Ensures all curators are treated identically in settlement, reputation, ranking.
- * @see docs/NEUTRALITY.md
+ * @see specs/INVARIANTS.md
  */
 import { describe, it, expect } from "vitest";
 import { PROTOCOL_NEUTRALITY } from "@alexandrian/protocol";

@@ -1,6 +1,6 @@
 # @alexandrian/api
 
-Minimal API stub for **Milestone 1**. Serves `/` and `/health` so the Docker stack and `pnpm demo:full` can run without a full backend.
+Minimal API stub for **Milestone 1**. Serves `/` and `/health` so the Docker stack can run without a full backend.
 
 This stub exists solely to support demo orchestration in Milestone 1. Core protocol logic lives in `packages/protocol` and is tested independently.
 

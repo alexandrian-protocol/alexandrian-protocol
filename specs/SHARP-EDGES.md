@@ -83,7 +83,7 @@ Only `base` and `practice` have real Zod schemas. Comment: "TODO: Add Zod schema
 
 Several suites are permanently skipped (`describe.skip`) with messages like "requires API package (Milestone 2)". Others use `it.skipIf(!hasStack || process.env.RUN_* !== "1")`. If env is unset or wrong, tests silently skip and CI can still be green.
 
-**Mitigation:** Document required env (e.g. in README or `docs/testing.md`). Consider a single integration job that runs with env set and fails if required tests are skipped. (Economic invariants were previously hidden by a hardcoded `describe.skip`; that’s fixed.)
+**Mitigation:** Document required env (e.g. in README or `specs/`). Consider a single integration job that runs with env set and fails if required tests are skipped. (Economic invariants were previously hidden by a hardcoded `describe.skip`; that’s fixed.)
 
 ---
 
@@ -110,7 +110,7 @@ Tests read fixture JSON with `readFileSync`. Fine for current fixture size; very
 
 Uses `process.env.OPENAI_API_KEY`, `COHERE_API_KEY`, `EMBEDDER`, `OLLAMA_URL`. Missing key → throw. Override logic (`EMBEDDER=local` etc.) is easy to forget when debugging.
 
-**Mitigation:** Document in README or `docs/pipeline.md`; consider a small `embedder-config` check that validates env and prints a clear error before running the pipeline.
+**Mitigation:** Document in README or specs; consider a small `embedder-config` check that validates env and prints a clear error before running the pipeline.
 
 ---
 
@@ -140,4 +140,4 @@ Fixing 1, 2, 8, and 9 gives the biggest gain for grant/review and Milestone 1 cl
 
 When the pipeline (or SDK) imports `@alexandrian/protocol/core` or `@alexandrian/protocol/schema`, TypeScript looks for corresponding `.d.ts` files. The protocol package only listed plain `"./dist/core/index.js"` (etc.) in `exports`, so TypeScript had no explicit `types` entry for those subpaths and could not find declarations → **TS2307** or **TS7016** and pipeline build fails.
 
-**Mitigation:** Use conditional exports with a `types` entry for each subpath (e.g. `"./core": { "types": "./dist/core/index.d.ts", "default": "./dist/core/index.js" }`). Ensure the protocol build emits declarations for all entry points: `declaration: true` and `emitDeclarationOnly: false` in protocol’s tsconfig; no `composite`; run a clean protocol build if `dist/core/index.d.ts` or `dist/schema/index.d.ts` are missing. See [docs/PACKAGING.md](PACKAGING.md) for build hygiene.
+**Mitigation:** Use conditional exports with a `types` entry for each subpath (e.g. `"./core": { "types": "./dist/core/index.d.ts", "default": "./dist/core/index.js" }`). Ensure the protocol build emits declarations for all entry points: `declaration: true` and `emitDeclarationOnly: false` in protocol’s tsconfig; no `composite`; run a clean protocol build if `dist/core/index.d.ts` or `dist/schema/index.d.ts` are missing. See [PACKAGING.md](PACKAGING.md) for build hygiene.

@@ -88,7 +88,7 @@ The KB exists in canonical graph state; anyone can query it.
 
 Milestone 1 includes a runnable M1 demo test that proves deterministic KB identity, registry-ready formatting, subgraph indexability, and invariant enforcement.
 
-**`tests/m1-demo.test.ts`** runs the five steps above (protocol-only, no Hardhat):
+**`tests/demo-walkthrough/m1-demo.test.ts`** runs the five steps above (protocol-only, no Hardhat):
 
 - Create a KB (stateMachine + practice) → contentHash, CIDv1, same input → same output.
 - Determinism → key order, sources order normalized.

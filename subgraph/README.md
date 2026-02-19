@@ -1,27 +1,64 @@
-# Alexandrian Protocol — Subgraph (The Graph grant deliverable)
+# Alexandrian Protocol — Subgraph (The Graph)
 
-Subgraph for indexing Alexandrian Registry and royalty/settlement events. **Milestone 1 deliverable** for The Graph grant.
+Indexes **KnowledgeRegistry** (V2) on Base Sepolia: KB registrations and lineage.
 
 ---
 
-## Status
+## Prerequisites
 
-- Schema and mappings: to be added or linked from this repo.
-- Network: localhost (Hardhat) and testnet (e.g. Base Sepolia) as per [docs/TESTNET-ADDRESSES.md](../docs/TESTNET-ADDRESSES.md).
+- **Contract on Base Sepolia** — Deploy `KnowledgeRegistry` (or use existing). See [specs/TESTNET-ADDRESSES.md](../specs/TESTNET-ADDRESSES.md).
+- **ABI** — Compile protocol so the ABI exists:  
+  `pnpm test:protocol` or `hardhat compile --config packages/protocol/hardhat.config.cjs` (from repo root).
+- **The Graph CLI** — `npm install -g @graphprotocol/graph-cli`
 
-## Commands (when implemented)
+---
 
-From repo root:
+## Setup (once per deployment)
 
-```bash
-pnpm subgraph:codegen   # Generate types from schema
-pnpm subgraph:build     # Build subgraph
-```
+1. **Edit `subgraph.yaml`**  
+   Replace `YOUR_REGISTRY_ADDRESS` with the deployed KnowledgeRegistry address and set `startBlock` to the deploy block (optional but recommended).
 
-## Data indexed
+2. **Codegen and build** (from repo root):
 
-- KB registrations (contentHash, curator, type, domain, stake, query fee, attribution).
-- Query settlements (querier, KB, fee, protocol fee).
-- Stake and endorsement events.
+   ```bash
+   pnpm subgraph:codegen
+   pnpm subgraph:build
+   ```
 
-This directory is the **Milestone 1 deliverable** for The Graph grant; schema and mapping code live here or in a linked package.
+3. **Deploy to The Graph Studio** (optional):
+
+   ```bash
+   graph auth --studio YOUR_DEPLOY_KEY
+   cd subgraph && graph deploy --studio alexandria
+   ```
+
+   Or deploy by Studio subgraph ID:
+
+   ```bash
+   cd subgraph && graph deploy --studio c8ccd40643e950c41efe77d75c17cb34
+   ```
+
+---
+
+## Schema
+
+- **KnowledgeBlock** — id (kbId), curator, artifactType, parentCount, parents (lineage), timestamp, blockNumber.
+
+Events indexed: `KBRegistered(kbId, curator, artifactType, parentCount, parents)` from `KnowledgeRegistry.sol`.
+
+---
+
+## Commands (from repo root)
+
+| Command              | Description                          |
+|----------------------|--------------------------------------|
+| `pnpm subgraph:codegen` | Generate types from schema + ABI  |
+| `pnpm subgraph:build`   | Build subgraph (compile mapping)   |
+
+Deploy (from `subgraph/` after auth): `graph deploy --studio alexandria` or `graph deploy --studio c8ccd40643e950c41efe77d75c17cb34`.
+
+---
+
+## Note
+
+Settlement/deprecation events live in other contracts (e.g. AlexandrianRegistry). This subgraph indexes only **KnowledgeRegistry** for KB registration and lineage. To index settlements, add a second data source in `subgraph.yaml` and handlers in `src/mapping.ts`.

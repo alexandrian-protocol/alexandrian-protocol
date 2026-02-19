@@ -3,32 +3,39 @@
   "private": true,
   "packageManager": "pnpm@9.0.0",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "subgraph"
   ],
   "scripts": {
     "alex": "pnpm --filter @alexandrian/sdk exec node dist/bin/run.js",
     "build": "pnpm --filter @alexandrian/protocol --filter @alexandrian/pipeline --filter @alexandrian/sdk --filter @alexandrian/api run build",
     "test": "pnpm test:protocol && pnpm test:spec && pnpm test:integration",
-    "test:protocol": "pnpm --filter @alexandrian/protocol run test",
-    "test:spec": "vitest run tests/unit/ tests/invariants/ tests/m1-demo.test.ts",
+    "test:protocol": "pnpm exec hardhat test --config packages/protocol/hardhat.config.cjs",
+    "test:spec": "vitest run tests/unit/ tests/invariants/ tests/demo-walkthrough/m1-demo.test.ts",
     "test:invariants": "vitest run tests/invariants/",
     "test:integration": "vitest run tests/",
     "test:integration:ci": "vitest run tests/ --reporter=json --outputFile=integration-results.json && node scripts/assert-no-skipped-integration.mjs",
+    "test:spec:quiet": "vitest run tests/unit/ tests/invariants/ tests/demo-walkthrough/m1-demo.test.ts --reporter=dot",
+    "test:integration:quiet": "vitest run tests/ --reporter=dot",
+    "demo:quiet": "vitest run tests/demo-walkthrough/ingestion.test.ts --reporter=dot",
+    "verify": "node scripts/run-m1-verification.mjs",
+    "verify:m1": "node scripts/run-m1-verification.mjs",
     "deploy:local": "pnpm --filter @alexandrian/protocol deploy:local",
     "deploy:docker": "docker compose -f docker/docker-compose.yml run --rm -e CHAIN_RPC_URL=http://blockchain:8545 blockchain npx hardhat run scripts/deploy.cjs --network docker",
-    "deploy:testnet": "pnpm --filter @alexandrian/protocol deploy:testnet",
+    "deploy:testnet": "pnpm exec hardhat run packages/protocol/scripts/deploy-testnet.cjs --network base-sepolia --config packages/protocol/hardhat.config.cjs",
     "start": "pnpm --filter @alexandrian/api start",
     "dev": "pnpm --filter @alexandrian/api dev",
-    "demo": "pnpm exec vitest run tests/integration/ingestion.test.ts --reporter=verbose",
-    "demo:full": "node scripts/run-full-demo.mjs",
-    "demo:slash": "pnpm exec ts-node scripts/demo.ts --slash",
-    "demo:dispute": "pnpm exec ts-node scripts/demo.ts --dispute",
+    "demo": "pnpm exec vitest run tests/demo-walkthrough/ingestion.test.ts --reporter=verbose",
+    "demo:walkthrough": "node scripts/run-demo-walkthrough.mjs",
+    "demo:slash": "node scripts/demo.mjs --slash",
+    "demo:dispute": "node scripts/demo.mjs --dispute",
     "test:pipeline": "node scripts/test-pipeline.mjs",
     "generate:test-vectors": "node scripts/generate-test-vector-expected.mjs",
-    "subgraph:codegen": "pnpm --filter alexandrian-protocol-subgraph codegen",
-    "subgraph:build": "pnpm --filter alexandrian-protocol-subgraph build"
+    "subgraph:codegen": "pnpm --filter alexandrian-protocol-subgraph run codegen",
+    "subgraph:build": "pnpm --filter alexandrian-protocol-subgraph run build"
   },
   "devDependencies": {
+    "hardhat": "^2.28.0",
     "@types/node": "^20.0.0",
     "dotenv": "^16.0.0",
     "ethers": "^6.8.0",
@@ -36,7 +43,7 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.0.0",
     "vitest": "^0.34.0",
-    "supertest": "^6.3.0",
+    "supertest": "^7.1.3",
     "express": "^4.21.0",
     "@types/express": "^4.17.21"
   },
@@ -49,6 +56,19 @@
       "@nomicfoundation/hardhat-ethers": "3.1.3",
       "@nomicfoundation/hardhat-verify": "2.0.11",
       "@nomicfoundation/hardhat-network-helpers": "1.0.11"
+    },
+    "allowedDeprecatedVersions": {
+      "glob": "*",
+      "inflight": "*",
+      "ipfs-core-types": "*",
+      "ipfs-core-utils": "*",
+      "ipfs-http-client": "*",
+      "lodash.isequal": "*",
+      "multiaddr": "*",
+      "multiaddr-to-uri": "*",
+      "node-domexception": "*",
+      "rimraf": "*",
+      "tar": "*"
     }
   }
 }

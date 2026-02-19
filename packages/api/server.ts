@@ -1,6 +1,6 @@
 /**
  * Alexandrian API — minimal stub for M1.
- * Serves / and /health so Docker stack and demo:full can start.
+ * Serves / and /health so the Docker stack can start.
  * Full ingest/query/ledger in Milestone 2.
  */
 import express, { type Express } from "express";

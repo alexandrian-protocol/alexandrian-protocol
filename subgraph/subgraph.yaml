@@ -1,0 +1,29 @@
+# Alexandrian Protocol — KnowledgeRegistry subgraph
+# Replace YOUR_REGISTRY_ADDRESS and YOUR_DEPLOY_BLOCK after deploying to Base Sepolia.
+# Compile protocol first: pnpm test:protocol (or hardhat compile) so ABI exists.
+
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: KnowledgeRegistry
+    network: base-sepolia
+    source:
+      address: "YOUR_REGISTRY_ADDRESS"
+      abi: KnowledgeRegistry
+      startBlock: 0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - KnowledgeBlock
+      abis:
+        - name: KnowledgeRegistry
+          file: ../packages/protocol/artifacts/contracts/KnowledgeRegistry.sol/KnowledgeRegistry.json
+      eventHandlers:
+        # KBType serializes as uint8 in ABI
+        - event: KBRegistered(indexed bytes32,indexed address,uint8,uint256,bytes32[])
+          handler: handleKBRegistered
+      file: ./src/mapping.ts

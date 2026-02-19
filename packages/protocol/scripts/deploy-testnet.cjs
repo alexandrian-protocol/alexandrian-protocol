@@ -15,9 +15,12 @@
  *   CHAIN_RPC_URL=https://sepolia.base.org
  */
 
+const path = require("path");
+// Load protocol .env when run from repo root (e.g. pnpm deploy:testnet)
+require("dotenv").config({ path: path.join(__dirname, "..", ".env") });
+
 const hre = require("hardhat");
 const fs = require("fs");
-const path = require("path");
 
 const DEPLOYMENTS_DIR = path.join(__dirname, "..", "deployments");
 

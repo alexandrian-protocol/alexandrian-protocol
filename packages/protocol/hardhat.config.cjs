@@ -34,6 +34,10 @@ module.exports = {
   },
   mocha: {
     timeout: 40000,
-    exit: true
+    exit: true,
+    reporter: "dot"
+  },
+  gasReporter: {
+    enabled: process.env.REPORT_GAS === "true"
   }
 };

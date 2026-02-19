@@ -13,8 +13,9 @@ Short checklist and troubleshooting so reviewers get a smooth first run.
 
 ## Troubleshooting
 
-- **`ERR_PACKAGE_PATH_NOT_EXPORTED` (multiformats)** — You’re likely on Node 24. Switch to Node 20 LTS (see [docs/TROUBLESHOOTING.md](../docs/TROUBLESHOOTING.md)).
+- **`ERR_PACKAGE_PATH_NOT_EXPORTED` (multiformats)** — You’re likely on Node 24. Switch to Node 20 LTS (see [specs/TROUBLESHOOTING.md](../TROUBLESHOOTING.md)).
 - **`pnpm alex publish ...` does nothing / wrong error** — Use the double-dash: `pnpm alex -- publish ...`. The `--` is required so arguments are passed to the CLI. See [COMMANDS.md](COMMANDS.md) for exact copy-paste commands.
-- **Hardhat crash on Windows (UV_HANDLE_CLOSING)** — See [docs/TROUBLESHOOTING.md](../docs/TROUBLESHOOTING.md). CI runs on Linux and is unaffected.
+- **Hardhat crash on Windows (UV_HANDLE_CLOSING)** — See [specs/TROUBLESHOOTING.md](../TROUBLESHOOTING.md). CI runs on Linux and is unaffected. If tests *passed* and then the assertion appears, the run is still a success.
+- **One-line Vite CJS deprecation** — If you see "The CJS build of Vite's Node API is deprecated," it’s harmless. Tests are unaffected. See [specs/TROUBLESHOOTING.md](../TROUBLESHOOTING.md).
 
-Full troubleshooting: [docs/TROUBLESHOOTING.md](../docs/TROUBLESHOOTING.md).
+Full troubleshooting: [specs/TROUBLESHOOTING.md](../TROUBLESHOOTING.md).

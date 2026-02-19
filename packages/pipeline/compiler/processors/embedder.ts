@@ -209,11 +209,7 @@ export function createEmbedder(): Embedder {
   if (process.env.OPENAI_API_KEY)  return new OpenAIEmbedder();
   if (process.env.COHERE_API_KEY)  return new CohereEmbedder();
 
-  console.warn(
-    '[Embedder] No embedding provider configured. Using stub.\n' +
-    'For real semantic search, set OPENAI_API_KEY or COHERE_API_KEY,\n' +
-    'or run Ollama locally and set EMBEDDER=local'
-  );
+  console.log('[Embedder] Running in stub mode (M1). Semantic providers optional.');
   return new StubEmbedder();
 }
 

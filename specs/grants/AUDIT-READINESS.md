@@ -14,7 +14,7 @@ How Alexandrian holds up against a nine-pillar protocol doctrine.
 - **Structural:** VirtualRegistry rejects duplicate sources, cycles, unregistered parents; canonical hash independent of timestamp and source order.
 - **Ledger:** RS bounds, freshness, tier, payout, leaf hash in ledger stub and tests.
 
-**Gap:** Invariants are in code and tests; they are not yet listed in one place as “the set of protocol invariants” with a single source of truth (e.g. PROTOCOL-SPEC or a dedicated invariants doc).
+**Gap:** Invariants are in code and tests; they are not yet listed in one place as "the set of protocol invariants" with a single source of truth (e.g. PROTOCOL-SPEC or a dedicated invariants doc).
 
 ---
 
@@ -44,7 +44,7 @@ How Alexandrian holds up against a nine-pillar protocol doctrine.
 
 ## 4. Independent verifiability (trust minimization)
 
-**Doctrine:** The question is “Can an adversary independently recompute and validate?” not “Can the server compute it?”
+**Doctrine:** The question is "Can an adversary independently recompute and validate?" not "Can the server compute it?"
 
 **Alexandrian:** Strong primitives.
 
@@ -99,12 +99,12 @@ How Alexandrian holds up against a nine-pillar protocol doctrine.
 **Alexandrian:** Implicit in design, not explicit.
 
 - **What exists:** VirtualRegistry and contracts reject cycles and duplicate sources; economic invariants cap shares and paths; neutrality commitment (no privileged curator). No `FOUNDER`/`ARCHITECT` in settlement or ranking.
-- **What’s missing:** A short, written threat model that states:
+- **What's missing:** A short, written threat model that states:
   - Assumed adversaries (e.g. rational curators, spam accounts, colluding parties).
   - Explicit threats considered (e.g. parent spam, royalty-path inflation, 10k tiny KBs to game settlement, exponential DAG traversal).
   - What the protocol does **not** guarantee (e.g. cost of spam, reputation gaming, or Sybil beyond structural/economic invariants).
 
-**Recommendation:** Add `docs/THREAT-MODEL.md` (or a section in PROTOCOL-SPEC) listing assumed adversaries, in-scope threats, and out-of-scope assumptions. Even one page significantly raises protocol-grade credibility.
+**Recommendation:** Add `specs/THREAT-MODEL.md` (or a section in PROTOCOL-SPEC) listing assumed adversaries, in-scope threats, and out-of-scope assumptions. Even one page significantly raises protocol-grade credibility.
 
 ---
 
@@ -114,14 +114,14 @@ How Alexandrian holds up against a nine-pillar protocol doctrine.
 
 **Alexandrian:** Partially addressed by structure; not yet stated as economic assumptions.
 
-- **What exists:** Royalty DAG is cycle-free and share-bounded; distribution is deterministic; stake and query fees exist. Invariants prevent “impossible” economic states (e.g. >100% shares).
-- **What’s missing:** Explicit economic assumptions and design choices, e.g.:
+- **What exists:** Royalty DAG is cycle-free and share-bounded; distribution is deterministic; stake and query fees exist. Invariants prevent "impossible" economic states (e.g. >100% shares).
+- **What's missing:** Explicit economic assumptions and design choices, e.g.:
   - Is spam (many low-value KBs) profitable or unprofitable under current fee/stake design?
   - Is parent inflation (deep DAGs, many parents) bounded or discouraged by rules or costs?
   - Can collusion increase payout beyond what the DAG allows, or is it limited to what the DAG allows?
   - What is the intended story for reputation gaming (e.g. self-endorsement, Sybil)?
 
-**Recommendation:** Add `docs/ECONOMIC-ASSUMPTIONS.md` (or a section in PROTOCOL-SPEC) that states: what the protocol assumes about rational actors, what it tries to discourage (e.g. spam, parent inflation), and what remains out of scope (e.g. full Sybil resistance). This completes “economically sound under rational incentives” in a reviewer-visible way.
+**Recommendation:** Add `specs/ECONOMIC-ASSUMPTIONS.md` (or a section in PROTOCOL-SPEC) that states: what the protocol assumes about rational actors, what it tries to discourage (e.g. spam, parent inflation), and what remains out of scope (e.g. full Sybil resistance). This completes "economically sound under rational incentives" in a reviewer-visible way.
 
 ---
 
@@ -129,7 +129,7 @@ How Alexandrian holds up against a nine-pillar protocol doctrine.
 
 | Pillar                         | Status   | Notes                                                                 |
 |--------------------------------|----------|-----------------------------------------------------------------------|
-| 1. Invariant preservation      | Strong   | Enforced in code and tests; could add a single “invariants” manifest.|
+| 1. Invariant preservation      | Strong   | Enforced in code and tests; could add a single "invariants" manifest.|
 | 2. Deterministic core          | Aligned  | Identity and hashing are order- and timestamp-independent.           |
 | 3. Clear contract surface      | Strong   | Envelope, types, exports, ABI are stable and documented.              |
 | 4. Independent verifiability  | Strong   | Canonical hash, VirtualRegistry, economic math, on-chain settlement.  |
@@ -139,4 +139,4 @@ How Alexandrian holds up against a nine-pillar protocol doctrine.
 | 8. Adversarial model           | **Gap**  | Implicit in design; needs a short, explicit threat-model doc.         |
 | 9. Economic soundness          | **Gap**  | Structure supports soundness; needs explicit economic assumptions.   |
 
-**Verdict:** Alexandrian is strong on reliability, determinism, layering, failure clarity, and contract stability. To meet “protocol-grade” doctrine fully, the two missing pieces are: **(8) an explicit adversarial model** and **(9) explicit economic assumptions.** Adding concise, honest threat-model and economic-assumptions docs (or sections) closes that gap and makes the protocol’s maturity and scope clear to reviewers.
+**Verdict:** Alexandrian is strong on reliability, determinism, layering, failure clarity, and contract stability. To meet "protocol-grade" doctrine fully, the two missing pieces are: **(8) an explicit adversarial model** and **(9) explicit economic assumptions.** Adding concise, honest threat-model and economic-assumptions docs (or sections) closes that gap and makes the protocol's maturity and scope clear to reviewers.

@@ -12,7 +12,13 @@ contract KnowledgeRegistry is IKnowledgeRegistry {
 
     mapping(bytes32 => KnowledgeBlock) private _blocks;
 
-    event KBRegistered(bytes32 indexed kbId, address indexed curator, KBType artifactType, uint256 parentCount);
+    event KBRegistered(
+        bytes32 indexed kbId,
+        address indexed curator,
+        KBType artifactType,
+        uint256 parentCount,
+        bytes32[] parents
+    );
 
     function registerKB(
         bytes32 _contentHash,
@@ -29,7 +35,7 @@ contract KnowledgeRegistry is IKnowledgeRegistry {
             artifactType: _type,
             parents:      _parents
         });
-        emit KBRegistered(kbId, msg.sender, _type, _parents.length);
+        emit KBRegistered(kbId, msg.sender, _type, _parents.length, _parents);
         return kbId;
     }
 

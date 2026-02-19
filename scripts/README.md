@@ -11,7 +11,7 @@ Contract deployment is in **packages/protocol**. From repo root:
 | Command | What it does |
 |--------|----------------|
 | `pnpm deploy:local` | Deploy Registry, Token, KYAStaking, EpochCommit to local Hardhat. Outputs to `packages/protocol/deployments/`. |
-| `pnpm deploy:testnet` | Deploy to testnet (e.g. Base Sepolia). Set RPC and deployer key; record addresses in [docs/TESTNET-ADDRESSES.md](../docs/TESTNET-ADDRESSES.md). |
+| `pnpm deploy:testnet` | Deploy to testnet (e.g. Base Sepolia). Set RPC and deployer key; record addresses in [specs/TESTNET-ADDRESSES.md](../specs/TESTNET-ADDRESSES.md). |
 | `pnpm deploy:docker` | Deploy from inside Docker stack: `docker compose -f docker/docker-compose.yml run --rm -e CHAIN_RPC_URL=http://blockchain:8545 blockchain npx hardhat run scripts/deploy.cjs --network docker`. |
 
 The actual deploy script is `packages/protocol/scripts/deploy.cjs` (or `.ts` if present).
@@ -35,9 +35,12 @@ The **seeds/** directory holds ~20 seed KBs (e.g. software.security, software.pa
 
 | Command / Script | What it does |
 |------------------|----------------|
-| `pnpm demo` | One-command demo: runs ingestion test (`tests/integration/ingestion.test.ts`) via vitest. No chain or API required. |
+| **`pnpm verify`** | **Clean M1 verification:** install → build → all tests → demo. Dot reporters; minimal noise. |
+| **`pnpm demo:walkthrough`** | **Demo artifact for reviewers:** build → protocol demo → ingestion demo → M1 demo tests. **Human-readable output** (verbose); no dots. Use for grant submission or non-technical review. |
+| `pnpm demo` | One-command demo: runs ingestion test via vitest (verbose). No chain or API required. |
 | `node scripts/demo.mjs` | Protocol-only: register KB → derive KB in VirtualRegistry (no pipeline). Run after `pnpm build`. |
-| `pnpm demo:full` | `node scripts/run-full-demo.mjs` — full flow when stack is up. |
-| `pnpm demo:slash` / `pnpm demo:dispute` | Slash and dispute demos via `scripts/demo.ts`. |
+| `pnpm demo:slash` / `pnpm demo:dispute` | Slash and dispute demos via `scripts/demo.mjs`. |
 
-Reviewers should use **`pnpm demo`** for the single-command experience.
+**Quiet variants (dot output):** `pnpm test:spec:quiet`, `pnpm test:integration:quiet`, `pnpm demo:quiet`. Used by `pnpm verify`.
+
+Reviewers: **`pnpm demo:walkthrough`** for a human-readable demo artifact; **`pnpm verify`** for a full quiet verification run; **`pnpm demo`** for ingestion only.

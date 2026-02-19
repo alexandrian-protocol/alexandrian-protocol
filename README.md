@@ -1,180 +1,160 @@
-# Alexandrian Protocol
+# Alexandria
 
 [![CI](https://github.com/alexandrian-protocol/alexandrian-protocol/actions/workflows/ci.yml/badge.svg)](https://github.com/alexandrian-protocol/alexandrian-protocol/actions/workflows/ci.yml)
 
-Monorepo for the Alexandrian Protocol: canonical knowledge blocks, content-addressed serialization (JCS/CIDv1), VirtualRegistry, Solidity contracts (Registry, Royalty, License), and pipeline/SDK/API packages.
+**Alexandria** is the monorepo for the **Alexandrian Protocol**: canonical knowledge blocks, content-addressed serialization (JCS/CIDv1), VirtualRegistry, Solidity contracts (Registry, Royalty, License), and pipeline/SDK/API packages.
 
 **Why agents need this.** Agents coordinate through shared state, not through messaging each other. The registry is that shared state: content-addressed KBs and a royalty DAG encode who contributed what. Stake is the coordination signal—curators lock capital on claims they stand behind. The DAG encodes collaboration without point-to-point messages: derivation and attribution are first-class, so agents can build on each other’s outputs and get paid along the graph. That’s the thesis.
 
 ---
 
+## Protocol guarantees
+
+| Guarantee | Status |
+|-----------|--------|
+| Deterministic identity | ✔ Same logical input → same contentHash/CID |
+| Canonical derivation DAG | ✔ VirtualRegistry: cycle-free, sorted sources |
+| On-chain attribution | ✔ Registry: publish, settle, royalty routing |
+| Enforced royalty routing | ✔ Economic invariants; no cycles, path ≤ 100% |
+| Staked curator accountability | ✔ Stake, slashing, reputation (contracts + tests) |
+
+---
+
 ## For Milestone 1 grant reviewers
 
-**Single entry point:** [grant-committee/](grant-committee/) — demos, commands, and links to all docs in one place.
-
-**Non-negotiable (what we deliver for M1):**
+**Single entry point:** [specs/grants/](specs/grants/) — demos, commands, and links to all docs in one place.
 
 Milestone 1 includes a runnable M1 demo test that proves deterministic KB identity, registry-ready formatting, subgraph indexability, and invariant enforcement.
 
-| Item | Purpose |
-|------|--------|
-| **packages/protocol** | Contracts + canonical hashing — the core spec and reference implementation. |
-| **packages/sdk** | CLI and SDK — proof the protocol is usable. |
-| **tests/** | All six failure-mode tests plus unit, invariants, integration, performance. |
-| **test-vectors/** | Canonical spec reference data (envelope → contentHash/CID). |
-| **subgraph/** | The Graph grant deliverable — indexing Registry and royalty events. |
-| **seeds/** | 20 seed KBs — demonstrates real usage. |
-| **.github/workflows/ci.yml** | Green badge — build + spec tests + integration (no silent skips). |
+**Non-negotiable (M1):** protocol, SDK, tests, test-vectors, subgraph, seeds, CI. **Supporting:** specs, scripts, glossary, docker. **Not M1:** api, pipeline, runtime, discovery, agents (internal or M2+). See [specs/grants/README.md](specs/grants/README.md) for the full table.
 
-**Important supporting:**
+---
 
-| Item | Purpose |
-|------|--------|
-| **docs/** | PROTOCOL-SPEC, INVARIANTS, ECONOMICS, GAS, TESTNET-ADDRESSES, threat/quality docs. |
-| **scripts/** | deploy, seed, demo — see [scripts/README.md](scripts/README.md). |
-| **glossary.md** | Terminology reviewers need (KB, contentHash, CID, VirtualRegistry, etc.). |
-| **README.md** | This file — first thing reviewers read. |
-| **docker/** | One-command local setup: `docker compose -f docker/docker-compose.yml up --build`. |
+## Milestone 1 complete when
 
-**Not part of M1 (internal or M2+):**
+- Protocol is deterministic (canonical identity, source ordering, no duplicates).
+- Registry works (deploy, publish, settle).
+- Settlement routing works (economic invariants, royalty DAG).
+- Tests are reproducible (spec, invariants, integration, protocol).
+- Repo builds cleanly on a fresh clone.
+- No runtime crashes; no scary logs (see [Troubleshooting](specs/TROUBLESHOOTING.md) for known Windows/Node notes).
 
-- **packages/api**, **packages/pipeline**, **packages/runtime** — internal.
-- **packages/discovery**, **packages/agents** — M2+.
-- **samples/** — internal.
+---
+
+## Proof of execution
+
+Run these from the **repository root**. Use one command per line (OS-neutral; on PowerShell use `;` instead of `&&` if you chain).
+
+| What | Command | Expected result |
+|------|---------|-----------------|
+| **Canonical test suite** | `pnpm test:spec` | Unit + invariants + M1 demo passed. Deterministic hashing and citation DAG validated. |
+| **Integration tests** | `pnpm test:integration` | Suite passed. Economic invariants and publish/settlement loop validated. |
+| **Local demo** | `pnpm demo` | Knowledge block created, IPFS CID generated, content hash verified, identity proven deterministic. |
+| **Contract tests** | `pnpm test:protocol` | Hardhat tests passed. (Windows: use WSL for clean exit; CI runs on Linux.) |
+| **SDK examples** | From `packages/sdk`: `pnpm build` then `npx ts-node examples/research-agent.ts` or `examples/contribute.ts` | Onboarding scripts run; see [packages/sdk/examples/](packages/sdk/examples/). |
+
+No raw logs required—just green results and the signals above. You may see one harmless Vitest/Vite deprecation line; ignore it.
+
+**Clean one-command run (for reviewers):** `pnpm verify` — install, build, contract tests, spec tests, integration tests, and demo with section headers and minimal output (dot reporters). Full commands: [specs/grants/COMMANDS.md](specs/grants/COMMANDS.md).
+
+---
+
+## Status
+
+| Component | Status |
+|-----------|--------|
+| Registry (contracts) | ✅ Implemented |
+| Canonical test vectors | ✅ Passing |
+| Integration tests | ✅ Passing (M2 API tests allowlisted by design) |
+| SDK & CLI | ✅ Operational |
+| Contract tests (Hardhat) | ✅ Passing (CI/Linux; on Windows use WSL for clean exit) |
+| Subgraph | ✅ M1 deliverable (directory + README; schema/mappings in progress) |
+| IPFS storage | ✅ Confirmed (pipeline/demo) |
+
+Addresses: no placeholders in repo. Local → `pnpm deploy:local`; testnet → [specs/TESTNET-ADDRESSES.md](specs/TESTNET-ADDRESSES.md). Roadmap: [specs/m2/ROADMAP.md](specs/m2/ROADMAP.md).
 
 ---
 
 ## One-command demo
 
-Reviewers run one command to see the stack work:
+From repo root (OS-neutral: run each line, or chain with `;` on PowerShell):
 
-```bash
-pnpm install && pnpm build && pnpm demo
+```
+pnpm install
+pnpm build
+pnpm demo
 ```
 
-On **PowerShell** use `;` instead of `&&`: `pnpm install; pnpm build; pnpm demo`
+**What it does:** Raw content → fingerprint (CID) → knowledge blocks → validate → verify. No chain or API required.
 
-**What it does:** Runs the ingestion flow (pipeline + protocol): raw content → fingerprint (CID) → compile into knowledge blocks → validate against dataset schema → verify integrity. No chain or API required.
+Protocol-only (VirtualRegistry): after build, run `node scripts/demo.mjs`.
 
-For protocol-only (register KB → derive KB in VirtualRegistry): after build, run `node scripts/demo.mjs` from repo root.
-
-**One-command local stack (contracts + API + IPFS + Redis):**
-
-```bash
-docker compose -f docker/docker-compose.yml up --build
-```
-
-See [docker/README.md](docker/README.md). For a scene-by-scene recording guide (publish → derive → settle → lineage), see [docs/demo-video-script.md](docs/demo-video-script.md).
-
----
-
-## CI & quality signals
-
-CI runs on every push/PR and enforces:
-
-- **pnpm install** — Frozen lockfile.
-- **pnpm build** — Protocol, pipeline, SDK, API compile.
-- **pnpm test:spec** — Unit + canonical vectors + economic invariants (no API/Redis).
-- **pnpm test:invariants** — Invariants only (`tests/invariants/`).
-- **pnpm test:integration** — Full suite (unit, invariants, integration, performance).
-- **pnpm test:protocol** — Contract tests (Hardhat in `packages/protocol`).
-- **pnpm test** — Runs test:protocol, test:spec, test:integration.
-
-**All tests live in `/tests`.** Single root Vitest config. No Vitest in subpackages; no smoke tests. CI runs test:spec, test:invariants, test:integration:ci, test:protocol.
-
-Green badge = real engineering discipline.
-
----
-
-## Milestone checklist (formal delivery)
-
-**Milestone 1 — Spec & conformance**
-
-- [x] Canonical test vectors in `test-vectors/canonical/` (envelope + expected hash/CID).
-- [x] `pnpm test:spec` passing: unit + canonical vectors + economic invariants.
-- [x] Serialization spec in `docs/` (PROTOCOL-SPEC, serialization-test-vectors).
-- [x] VirtualRegistry: cycle rejection, duplicate-source rejection, lineage validation.
-- [x] Zod schemas for all 10 KB types (minimal); roadmap for tightening (Milestone 2).
-- [x] Subgraph directory as The Graph grant deliverable (`subgraph/`).
-
-**Milestone 2 — API & full stack** (when unblocked)
-
-- [ ] Integration tests unskipped (API/Redis or stubs available in CI).
-- [ ] Register KB on-chain, derive KB, query, settle citation (full flow).
-- [ ] Subgraph schema and mappings implemented.
-
-**Roadmap (post-M1)** — Settlement engine v2, multi-chain deployment, and full subgraph indexing are planned; not in scope for the M1 deliverable.
+**Full local stack (Docker):** `docker compose -f docker/docker-compose.yml up --build` — from repo root; Docker Desktop must be running on Windows. See [docker/README.md](docker/README.md).
 
 ---
 
 ## Dependencies
 
-- **Node.js 20 LTS** (recommended: 20.19.0; see `.nvmrc` / `.node-version`). Node 24 has a known multiformats resolution issue in this monorepo (`ERR_PACKAGE_PATH_NOT_EXPORTED` when running the CLI or some imports).
+- **Node.js 20 LTS** (20.19.0 recommended; `.nvmrc` / `.node-version`). Node 24 has a known multiformats resolution issue in this monorepo.
 - **pnpm** (see `packageManager` in `package.json`).
-
-## Fresh clone
-
-`pnpm install && pnpm build` works on a fresh clone with no `.env` or extra setup. Build does not mutate env or require secrets.
-
-## Exact commands (Build, Run, Deploy, E2E)
-
-| Goal | Command |
-|------|--------|
-| **Build** | `pnpm install && pnpm build` |
-| **Run (one-command demo)** | `pnpm demo` |
-| **Deploy (local)** | `pnpm deploy:local` |
-| **Deploy (Docker stack)** | `docker compose -f docker/docker-compose.yml up --build` |
-| **Run full E2E** | `pnpm demo:full` (requires API + chain; start stack first) |
 
 ---
 
 ## Quick start
 
-```bash
+```
 pnpm install
 pnpm build
-pnpm demo              # One-command demo (ingestion flow)
-pnpm test              # Protocol + spec + integration (all tests live in /tests)
-pnpm test:spec         # Unit + invariants (no API/Redis)
-pnpm test:invariants   # Invariants only
-pnpm test:integration  # Full suite (CI fails if tests skipped unexpectedly)
-pnpm test:protocol    # Contract tests (Hardhat)
+pnpm demo
+pnpm test:spec
+pnpm test:integration
+pnpm test:protocol
 ```
+
+Full commands and CLI: [specs/grants/COMMANDS.md](specs/grants/COMMANDS.md).
+
+---
 
 ## Structure (M1-focused)
 
-- **packages/protocol** — Core: types, schemas, canonical serialization, VirtualRegistry, Solidity contracts. [README](packages/protocol/README.md).
-- **packages/sdk** — Client SDK and CLI.
-- **test-vectors/canonical** — [Milestone 1 canonical test vectors](test-vectors/canonical/README.md).
-- **tests/** — All tests live here. Unit, invariants, integration, performance (single root config; no tests in subpackages).
-- **subgraph/** — The Graph grant M1 deliverable. [README](subgraph/README.md).
-- **seeds/** — 20 seed KBs for demos and reviewers.
-- **scripts/** — [Deploy, seed, demo](scripts/README.md).
+| Area | Purpose |
+|------|---------|
+| **packages/protocol** | Core: types, schemas, canonical serialization, VirtualRegistry, Solidity contracts. |
+| **packages/sdk** | Client SDK and CLI. **Onboarding:** [packages/sdk/examples/](packages/sdk/examples/) — `research-agent.ts`, `contribute.ts` (run after build). |
+| **tests/** | Unit, invariants, integration, M1 demo (single root Vitest config). |
+| **test-vectors/canonical** | Canonical spec reference (envelope → contentHash/CID). |
+| **subgraph/** | The Graph M1 deliverable. |
+| **seeds/** | Seed KBs for demos. |
+| **scripts/** | Deploy, seed, demo. [scripts/README.md](scripts/README.md). |
+
+---
 
 ## Docs
 
-- [PROTOCOL-SPEC](docs/PROTOCOL-SPEC.md) — Protocol specification (v2.0.0).
-- [ARCHITECTURE](docs/ARCHITECTURE.md) — Protocol core vs runtime API; core tests must not depend on api.
-- [INVARIANTS](docs/INVARIANTS.md) — Protocol and economic invariants; pointers to code and tests.
-- [ECONOMIC-ASSUMPTIONS](docs/ECONOMIC-ASSUMPTIONS.md) — Royalty DAG, shares, distribution.
-- [GAS](docs/GAS.md) — Contract gas notes. [TESTNET-ADDRESSES](docs/TESTNET-ADDRESSES.md) — Deployed addresses.
-- [Serialization test vectors](docs/serialization-test-vectors.md) — Canonical envelope format.
-- [PACKAGING](docs/PACKAGING.md) — TypeScript packaging and exports.
-- [Threat model](docs/THREAT-MODEL.md) | [Protocol quality assessment](docs/PROTOCOL-QUALITY-ASSESSMENT.md).
-- [glossary.md](glossary.md) — Terminology for reviewers.
-- [M1 Demo](docs/M1-DEMO.md) — What M1 proves: create KB → determinism → register → subgraph → invariant protection.
-- [Demo video script](docs/demo-video-script.md) — Scene-by-scene E2E recording guide (publish, query, settle, deprecate, lineage).
-- [Troubleshooting](docs/TROUBLESHOOTING.md) — Windows Hardhat crash (UV_HANDLE_CLOSING), Node upgrade, WSL.
-- [@alexandrian/protocol API](packages/protocol/docs/API.md) — Package API reference.
+| Doc | Purpose |
+|-----|---------|
+| [PROTOCOL-SPEC](specs/PROTOCOL-SPEC.md) | Canonical serialization, hashing, KB types. |
+| [INVARIANTS](specs/INVARIANTS.md) | Protocol and economic invariants. |
+| [ARCHITECTURE](specs/ARCHITECTURE.md) | Protocol core vs runtime API; testing. |
+| [M1 Demo](specs/M1-DEMO.md) | What M1 proves: create KB → determinism → register → subgraph → invariants. |
+| [Troubleshooting](specs/TROUBLESHOOTING.md) | Node 24/multiformats, Windows Hardhat, Docker. |
+| [ROADMAP](specs/m2/ROADMAP.md) | Post-M1 and M2. |
+| [glossary.md](glossary.md) | KB, contentHash, CID, VirtualRegistry, etc. |
+
+Gas, testnet addresses, threat model, packaging: see [specs/](specs/).
+
+---
 
 ## Environment (pipeline / embedder)
 
 | Env | Behavior |
 |-----|----------|
-| `EMBEDDER=stub` | No API; stub vectors (default when no keys set). |
+| (default / stub) | No semantic API; stub mode (M1). Message: *Running in stub mode (M1). Semantic providers optional.* |
 | `EMBEDDER=local` | Ollama (e.g. `OLLAMA_URL=http://localhost:11434`). |
-| `EMBEDDER=openai` | **Requires `OPENAI_API_KEY`.** Fails fast at pipeline start if unset. |
-| `EMBEDDER=cohere` | **Requires `COHERE_API_KEY`.** Fails fast at pipeline start if unset. |
+| `EMBEDDER=openai` | Requires `OPENAI_API_KEY`. Fails fast at pipeline start if unset. |
+| `EMBEDDER=cohere` | Requires `COHERE_API_KEY`. Fails fast at pipeline start if unset. |
+
+---
 
 ## License
 

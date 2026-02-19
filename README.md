@@ -3,7 +3,7 @@
 
 **Alexandrian** is the protocol. It defines the primitive — a Knowledge Block with canonical identity, enforceable provenance, and atomic royalty settlement. Immutable by design.
 
-**Alexandria** is the library. It indexes, organizes, and exposes Knowledge Blocks for discovery and query. Built on the protocol, not part of it.
+**Alexandria** is the library. It indexes, organizes, and exposes Knowledge Blocks for discovery and query. 
 
 Agents exist as independent actors. They query indexed Knowledge Blocks via Alexandria and settle economically via the Alexandrian Protocol. Discovery is application-layer logic. Settlement is protocol-layer logic. Intent remains agent-defined.
 

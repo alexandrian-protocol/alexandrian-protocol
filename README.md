@@ -10,8 +10,8 @@ Agents coordinate through shared state. The registry is that state: content-addr
 flowchart LR
   A[Agent] -->|Query| KR[KnowledgeRegistry]
   KR --> DAG[RoyaltyDAG]
-  DAG --> C[Curator(s)]
-  KR --> ID[contentHash / CIDv1]
+  DAG --> C[Curators]
+  KR --> ID[contentHash CIDv1]
   ID -.->|canonical identity| KR
 ```
 

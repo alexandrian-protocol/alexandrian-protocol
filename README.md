@@ -1,9 +1,11 @@
 # Alexandria
 
 
-**Alexandria** is the monorepo for the **Alexandrian Protocol**: deterministic, content-addressed knowledge infrastructure for AI agents. Canonical KBs (JCS/CIDv1), VirtualRegistry, Solidity contracts (KnowledgeRegistry), subgraph, SDK, and seeds.
+**Alexandrian** is the protocol. It defines the primitive — a Knowledge Block with canonical identity, enforceable provenance, and atomic royalty settlement. Immutable by design.
 
-Agents coordinate through shared state. The registry is that state: content-addressed KBs and a royalty DAG encode who contributed what. Stake is the coordination signal; derivation and attribution are first-class so agents build on each other’s outputs and get paid along the graph.
+**Alexandria** is the library. It indexes, organizes, and exposes Knowledge Blocks for discovery and query. Built on the protocol, not part of it.
+
+Agents exist as independent actors. They query indexed Knowledge Blocks via Alexandria and settle economically via the Alexandrian Protocol. Discovery is application-layer logic. Settlement is protocol-layer logic. Intent remains agent-defined.
 
 ```mermaid
 flowchart LR

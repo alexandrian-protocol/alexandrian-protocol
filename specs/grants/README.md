@@ -2,6 +2,8 @@
 
 One place for reviewers: M1 (done) and M2 (planned), separated clearly. Links only what matters.
 
+**Alexandrian** is the protocol (primitive: Knowledge Block, canonical identity, provenance, atomic royalty settlement). **Alexandria** is the library (indexes, organizes, exposes KBs for discovery and query). Agents query via Alexandria and settle via the Alexandrian Protocol; discovery is application-layer, settlement is protocol-layer, intent is agent-defined.
+
 ---
 
 ## M1 — What to run

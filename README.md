@@ -19,19 +19,17 @@ git clone https://github.com/alexandrian-protocol/alexandrian-protocol.git && cd
 
 ## Milestone 1 — Complete
 
-Milestone 1 established deterministic Knowledge Block identity, on-chain registration, atomic settlement, and indexable lineage.
+Milestone 1 establishes deterministic Knowledge Block identity, on-chain registration, atomic settlement, and indexable lineage.
 
-| What | What This Demonstrates | Proof |
-|------|------------------------|-------|
-| Same content → same kbId, always | Deterministic canonical identity; invariant to key order and formatting | `pnpm test:spec` |
-| Canonical envelope → fixed contentHash + CIDv1 | Content-addressed identity derived from canonical serialization | `pnpm test:spec` |
-| Knowledge Blocks registered on-chain with permanent provenance | Registry enforces uniqueness and immutability of kbId | `pnpm test:protocol` |
-| Agent queries KB → curator paid atomically (98/2 split) | On-chain settlement executes fully or not at all | `pnpm test:protocol` |
-| RoyaltyDAG routes upstream payments | Derivations correctly split and route royalties | `pnpm test:protocol` |
-| Invalid schema, cycles, duplicates rejected | Structural integrity and graph safety enforced | `pnpm test:spec` |
-| Lineage queryable via subgraph | Knowledge graph externally indexable and composable | [subgraph/](subgraph/README.md) |
-| Full verification (install, build, all tests, demo) | One command runs the complete M1 check | `pnpm verify` |
-| Verbose walkthrough | Human-readable demo for reviewers | `pnpm demo:walkthrough` |
+| Guarantee | Enforced By | Proof |
+|-----------|-------------|-------|
+| Deterministic kbId derivation | Canonical serialization; invariant to key order and formatting | `pnpm test:spec` |
+| Stable contentHash + CIDv1 from canonical envelope | Content-addressed identity derived from canonical bytes | `pnpm test:spec` |
+| Unique on-chain registration | KnowledgeRegistry enforces immutability and uniqueness of kbId | `pnpm test:protocol` |
+| Atomic settlement (98/2 split) | Transaction-level execution; no partial state transitions | `pnpm test:protocol` |
+| Upstream royalty routing | RoyaltyDAG enforces deterministic split propagation | `pnpm test:protocol` |
+| Schema validation + cycle rejection | Structural integrity of Knowledge Block graph | `pnpm test:spec` |
+| Queryable lineage via subgraph | External indexability and composability | [subgraph/](subgraph/README.md) |
 
 ---
 

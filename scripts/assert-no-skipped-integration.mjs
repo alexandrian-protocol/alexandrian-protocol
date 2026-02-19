@@ -15,7 +15,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, "..");
 const reportPath = join(root, "integration-results.json");
 
-// Expected skipped test files (M2/API-dependent; documented in each file).
+// Expected skipped test files (M2/API-dependent; testnet/subgraph require funded wallet + deployed contracts).
 const ALLOWED_SKIP_FILES = [
   "ai-usage-proof.test",
   "flow-ai-usage-proof.test",
@@ -25,6 +25,8 @@ const ALLOWED_SKIP_FILES = [
   "payment-settlement.test",
   "query-settlement-fullstack.test",
   "royalty-settlement.test",
+  "testnet-smoke.test",
+  "subgraph.test",
 ];
 
 function isAllowedSkip(filePath) {

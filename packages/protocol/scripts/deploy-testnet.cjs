@@ -33,6 +33,11 @@ function writeDeployment(name, address, abi) {
 
 async function main() {
   const [deployer] = await hre.ethers.getSigners();
+  if (!deployer) {
+    console.error("\n  Missing deployer: set BASE_SEPOLIA_RPC_URL and PRIVATE_KEY in packages/protocol/.env");
+    console.error("  Example: PRIVATE_KEY=0x... BASE_SEPOLIA_RPC_URL=https://sepolia.base.org");
+    process.exit(1);
+  }
 
   console.log("\n═══════════════════════════════════════════════");
   console.log("  Alexandrian Protocol — Testnet Deploy (ETH)");
@@ -54,22 +59,53 @@ async function main() {
   const registryArtifact = await hre.artifacts.readArtifact("AlexandrianRegistry");
   writeDeployment("Registry", registryAddress, registryArtifact.abi);
 
+  console.log("\nDeploying KnowledgeRegistry (V2 — subgraph)...");
+  const KRFactory = await hre.ethers.getContractFactory("KnowledgeRegistry", deployer);
+  const knowledgeRegistry = await KRFactory.deploy();
+  await knowledgeRegistry.waitForDeployment();
+  const krAddress = await knowledgeRegistry.getAddress();
+  console.log(`   Address: ${krAddress}`);
+
+  const krArtifact = await hre.artifacts.readArtifact("KnowledgeRegistry");
+  writeDeployment("KnowledgeRegistry", krAddress, krArtifact.abi);
+
+  // Use the block that actually contains the KnowledgeRegistry deploy (not "latest")
+  const krDeployTx = knowledgeRegistry.deploymentTransaction();
+  const deployBlock = krDeployTx
+    ? (await krDeployTx.wait()).blockNumber
+    : await hre.ethers.provider.getBlockNumber();
+  console.log(`   Block:   ${deployBlock}`);
+
+  // Patch subgraph.yaml so testers don't have to edit by hand
+  const subgraphYamlPath = path.join(__dirname, "..", "..", "..", "subgraph", "subgraph.yaml");
+  if (fs.existsSync(subgraphYamlPath)) {
+    let yaml = fs.readFileSync(subgraphYamlPath, "utf8");
+    yaml = yaml.replace(/address:\s*"0x[a-fA-F0-9]{40}"/, `address: "${krAddress}"`);
+    yaml = yaml.replace(/startBlock:\s*\d+/, `startBlock: ${deployBlock}`);
+    fs.writeFileSync(subgraphYamlPath, yaml);
+    console.log("\n  ✅ subgraph/subgraph.yaml updated with KnowledgeRegistry address and startBlock.");
+  }
+
   console.log("\n═══════════════════════════════════════════════");
   console.log("  Deploy complete ✅");
   console.log("═══════════════════════════════════════════════");
-  console.log(`  Registry: ${registryAddress}`);
+  console.log(`  Registry:          ${registryAddress}`);
+  console.log(`  KnowledgeRegistry: ${krAddress} (use in subgraph)`);
   console.log("═══════════════════════════════════════════════\n");
   console.log("  Copy to packages/api/.env:");
   console.log(`  REGISTRY_ADDRESS=${registryAddress}`);
   console.log(`  CHAIN_RPC_URL=${hre.network.config.url}`);
   console.log(`  DEPLOYER_ADDRESS=${deployer.address}`);
+  console.log("\n  Update specs/TESTNET-ADDRESSES.md with both addresses.");
+  console.log("  Subgraph: confirm startBlock in subgraph/subgraph.yaml (must be actual deploy block, not 0).");
+  console.log("  Then: pnpm subgraph:deploy (or codegen + build + graph deploy --studio <slug>).");
   const chainId = Number(hre.network.config.chainId);
   const explorerBase = chainId === 84532 ? "https://sepolia.basescan.org" : chainId === 8453 ? "https://basescan.org" : "";
   if (explorerBase) {
+    console.log(`\n  Verify block on Basescan: ${explorerBase}/block/${deployBlock}`);
     console.log(`  CHAIN_EXPLORER_URL=${explorerBase}`);
-    console.log(`\n  Explorer (this deploy has no tx; use for future txs): ${explorerBase}/tx/<txHash>`);
   }
-  console.log("\n  For subgraph/subgraph.yaml, set source.address and startBlock.\n");
+  console.log("");
 }
 
 (async () => {

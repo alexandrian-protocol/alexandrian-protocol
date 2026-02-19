@@ -1,6 +1,6 @@
 # Alexandrian Protocol — KnowledgeRegistry (V2)
 # Indexes KB registrations and lineage for Base Sepolia.
-# One entity per KB; id = contentHash (kbId). Lineage via parents.
+# M2: queryCount, totalFeesEarned, deprecated, supersededBy — see subgraph/m2/.
 
 type KnowledgeBlock @entity {
   id: ID!                      # kbId = contentHash

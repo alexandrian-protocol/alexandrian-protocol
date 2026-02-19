@@ -12,7 +12,7 @@ pnpm verify
 
 **The only command needed for the M1 demo:** `pnpm demo:walkthrough`
 
-Full loop with verbose output — no dots; test names and results in plain language. Use before posting to testnet / Base grant. Run from repo root after `pnpm install` (script runs `pnpm build` first).
+Full loop with verbose output — no dots; test names and results in plain language. Use before posting to testnet or grant submission. Run from repo root after `pnpm install` (script runs `pnpm build` first).
 
 ```bash
 pnpm demo:walkthrough

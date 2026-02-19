@@ -24,6 +24,7 @@ Seed data for demos and reviewers:
 
 | Script | What it does |
 |--------|----------------|
+| **`pnpm register:seeds`** | **Register all 20 seeds on testnet** (KnowledgeRegistry on Base Sepolia). Requires `KNOWLEDGE_REGISTRY_ADDRESS` and `PRIVATE_KEY` in `packages/protocol/.env`. Run after `pnpm build` and `pnpm deploy:testnet`. Skips already-registered KBs. |
 | `scripts/seed-compute-hashes.mjs` | Compute contentHash/CID for seed KBs; updates `seeds/hashes.json`. |
 | `scripts/seed-test-data.ts` | Generate or validate seed test data. Run with `pnpm exec ts-node scripts/seed-test-data.ts` (or via package script if defined). |
 

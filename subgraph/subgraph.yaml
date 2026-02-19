@@ -10,9 +10,10 @@ dataSources:
     name: KnowledgeRegistry
     network: base-sepolia
     source:
-      address: "YOUR_REGISTRY_ADDRESS"
+      # Replace with deployed KnowledgeRegistry address after pnpm deploy:testnet (placeholder allows codegen)
+      address: "0x3ac306aD35Ea95a0Caa78512D8E55575ae30A8b1"
       abi: KnowledgeRegistry
-      startBlock: 0
+      startBlock: 37880250
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -23,7 +24,7 @@ dataSources:
         - name: KnowledgeRegistry
           file: ../packages/protocol/artifacts/contracts/KnowledgeRegistry.sol/KnowledgeRegistry.json
       eventHandlers:
-        # KBType serializes as uint8 in ABI
+        # KBType serializes as uint8 in ABI. M2: KBQueried, KBDeprecated — see subgraph/m2/
         - event: KBRegistered(indexed bytes32,indexed address,uint8,uint256,bytes32[])
           handler: handleKBRegistered
       file: ./src/mapping.ts

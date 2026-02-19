@@ -7,6 +7,11 @@ import "./interfaces/IKnowledgeRegistry.sol";
  * @title KnowledgeRegistry
  * @notice Immutable registration and lineage for Knowledge Blocks (V2).
  * @dev Uses contentHash as kbId: one canonical block per content.
+ *      M2: query accumulator, deprecation, slash — see contracts/m2/.
+ *
+ *      E2E: pnpm test:e2e | demo:walkthrough.
+ *      Testnet: .env BASE_SEPOLIA_RPC_URL + PRIVATE_KEY → pnpm deploy:testnet → specs/TESTNET-ADDRESSES.md.
+ *      Graph: subgraph.yaml (address + startBlock) → subgraph:codegen → subgraph:build → graph deploy --studio <slug>.
  */
 contract KnowledgeRegistry is IKnowledgeRegistry {
 

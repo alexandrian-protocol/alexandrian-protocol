@@ -1,0 +1,8 @@
+# M2 schema additions — append to main schema.graphql when wiring M2
+
+# Add these fields to type KnowledgeBlock:
+#
+#   queryCount: BigInt!
+#   totalFeesEarned: BigInt!
+#   deprecated: Boolean!
+#   supersededBy: Bytes

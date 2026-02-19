@@ -8,15 +8,10 @@ import "@openzeppelin/contracts/access/Ownable.sol";
  * @title XanderToken
  * @notice XANDER — the utility token for Alexandrian Protocol.
  *
- * Standard OpenZeppelin ERC-20 with:
- *   - transfer()         ✅ inherited from ERC20
- *   - approve()          ✅ inherited from ERC20
- *   - transferFrom()     ✅ inherited from ERC20
- *   - mint()             only callable by owner (deployer / API server wallet)
- *   - burn()             callable by any holder on their own balance
- *
- * For v1 the owner is the deployer wallet. In v2 ownership can be
- * transferred to a governance contract.
+ * Standard ERC-20. M2: ERC-2612 Permit — see packages/protocol/contracts/m2/.
+ *   - transfer / approve / transferFrom  ✅ ERC20
+ *   - mint()   only owner
+ *   - burn()   holder or approved
  */
 contract XanderToken is ERC20, Ownable {
 

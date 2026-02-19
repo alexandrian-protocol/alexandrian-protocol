@@ -1,6 +1,69 @@
 # Alexandrian Protocol — Subgraph (The Graph)
 
-Indexes **KnowledgeRegistry** (V2) on Base Sepolia: KB registrations and lineage.
+Indexes **KnowledgeRegistry** (V2) on Base Sepolia: KB registrations and lineage. Public-facing infrastructure for querying on-chain knowledge blocks by contentHash (kbId), curator, artifact type, and lineage (parents).
+
+**Repository:** [alexandrian-protocol/alexandrian-protocol](https://github.com/alexandrian-protocol/alexandrian-protocol) — monorepo root. After deploying to [Subgraph Studio](https://thegraph.com/studio), add this repo link and a short description on your subgraph page.
+
+---
+
+## Example GraphQL queries
+
+Use these against your deployed subgraph endpoint (Studio Playground or your app).
+
+**All knowledge blocks (latest first):**
+
+```graphql
+{
+  knowledgeBlocks(first: 10, orderBy: blockNumber, orderDirection: desc) {
+    id
+    curator
+    artifactType
+    parentCount
+    parents
+    timestamp
+    blockNumber
+  }
+}
+```
+
+**Single block by contentHash (kbId):**
+
+```graphql
+{
+  knowledgeBlock(id: "0x...") {
+    id
+    curator
+    artifactType
+    parentCount
+    parents
+    timestamp
+    blockNumber
+  }
+}
+```
+
+**Blocks by curator address:**
+
+```graphql
+{
+  knowledgeBlocks(where: { curator: "0x..." }, first: 20) {
+    id
+    artifactType
+    parentCount
+    timestamp
+  }
+}
+```
+
+---
+
+## startBlock (required)
+
+**`startBlock` in `subgraph.yaml` must be the actual block where KnowledgeRegistry was deployed — not 0, not a guess.**
+
+- After `pnpm deploy:testnet`, the deploy script writes the deploy block into `subgraph.yaml` automatically.
+- **Before running `subgraph:deploy`**, open `subgraph/subgraph.yaml` and confirm `source.startBlock` matches the deploy block. Verify on [Basescan](https://sepolia.basescan.org/) (block number from deploy output or from the deployment tx).
+- If startBlock is wrong, the subgraph will index nothing or spend hours syncing through irrelevant history. Once correct, Studio’s sync progress reaches 100% and the GraphQL endpoint is live; then subgraph integration tests can run against real data.
 
 ---
 
@@ -15,28 +78,23 @@ Indexes **KnowledgeRegistry** (V2) on Base Sepolia: KB registrations and lineage
 
 ## Setup (once per deployment)
 
-1. **Edit `subgraph.yaml`**  
-   Replace `YOUR_REGISTRY_ADDRESS` with the deployed KnowledgeRegistry address and set `startBlock` to the deploy block (optional but recommended).
+1. **Subgraph.yaml**  
+   After `pnpm deploy:testnet`, `subgraph.yaml` is **automatically** updated with the deployed **KnowledgeRegistry** address and `startBlock`. **Confirm** `startBlock` is the actual deploy block (see [startBlock](#startblock-required) above) before deploying the subgraph.
 
-2. **Codegen and build** (from repo root):
-
-   ```bash
-   pnpm subgraph:codegen
-   pnpm subgraph:build
-   ```
-
-3. **Deploy to The Graph Studio** (optional):
+2. **Codegen, build, and deploy** (from repo root):
 
    ```bash
-   graph auth --studio YOUR_DEPLOY_KEY
-   cd subgraph && graph deploy --studio alexandria
+   pnpm subgraph:deploy
    ```
 
-   Or deploy by Studio subgraph ID:
+   This runs codegen + build. If you set `GRAPH_STUDIO_DEPLOY_KEY` and `SUBGRAPH_SLUG` in `packages/protocol/.env` (or root `.env`), it also deploys to The Graph Studio (no manual auth or typing).
 
-   ```bash
-   cd subgraph && graph deploy --studio c8ccd40643e950c41efe77d75c17cb34
-   ```
+   Optional env (for deploy):
+
+   - `GRAPH_STUDIO_DEPLOY_KEY` — Deploy key from [Subgraph Studio](https://thegraph.com/studio) → your subgraph → Settings.
+   - `SUBGRAPH_SLUG` — Subgraph slug (e.g. `alexandria`) or Studio subgraph ID.
+
+   If either is missing, only codegen + build run; deploy is skipped.
 
 ---
 
@@ -54,8 +112,7 @@ Events indexed: `KBRegistered(kbId, curator, artifactType, parentCount, parents)
 |----------------------|--------------------------------------|
 | `pnpm subgraph:codegen` | Generate types from schema + ABI  |
 | `pnpm subgraph:build`   | Build subgraph (compile mapping)   |
-
-Deploy (from `subgraph/` after auth): `graph deploy --studio alexandria` or `graph deploy --studio c8ccd40643e950c41efe77d75c17cb34`.
+| `pnpm subgraph:deploy`  | Codegen + build; if env set, deploy to Studio (no manual auth) |
 
 ---
 

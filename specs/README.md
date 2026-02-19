@@ -1,6 +1,8 @@
 # Specs
 
-Protocol and project documentation. Layout: top-level specs, [grants/](grants/) (reviewer entry), [m2/](m2/) (Sepolia, roadmap, video script).
+Protocol and project documentation. Layout: top-level specs, [grants/](grants/) (reviewer entry), [m2/](m2/) (grant narrative, roadmap, video script).
+
+**End-to-end flow:** [E2E-TESTNET-GRAPH.md](E2E-TESTNET-GRAPH.md) — local testing → testnet deploy → The Graph.
 
 ---
 

@@ -6,14 +6,42 @@ Real knowledge content that populates the Alexandrian archive for demos, grant r
 
 See [specs/serialization-test-vectors.md](../specs/serialization-test-vectors.md) for the full spec.
 
+## Seed count (20 total)
+
+| Type | Count | Examples |
+|------|-------|----------|
+| **practice** | 9 | practice-input-validation, practice-rate-limiting, practice-circuit-breaker, practice-kb-authoring, … |
+| **stateMachine** | 2 | state-machine-auth-flow, state-machine-token-lifecycle |
+| **complianceChecklist** | 2 | compliance-owasp-top10, compliance-jwt-rfc7519 |
+| **pattern** | 2 | pattern-idempotency-key, pattern-webhook-delivery |
+| **synthesis** (derived) | 3 | synthesis-secure-api-design, synthesis-auth-patterns, synthesis-knowledge-economy-intro |
+| **adaptation** (derived) | 1 | adaptation-retry-to-queue |
+| **enhancement** (derived) | 1 | enhancement-circuit-breaker-observability |
+
 ## Structure
 
 ```
 seeds/
-  software.security/     # 12 seeds — auth, crypto, OWASP, synthesis
-  software.patterns/     # 6 seeds — retry, circuit breaker, adaptation, enhancement
-  meta.alexandria/       # 3 seeds — KB authoring, taxonomy, intro
+  software.security/     # auth, crypto, OWASP, synthesis (11)
+  software.patterns/     # retry, circuit breaker, adaptation, enhancement (7)
+  meta.alexandria/       # KB authoring, taxonomy, intro (3)
 ```
+
+## Recommended for graph (a few of each + derived)
+
+Register these on testnet so the subgraph shows variety and lineage:
+
+1. **One practice per domain:** `practice-input-validation`, `practice-circuit-breaker`, `practice-kb-authoring`
+2. **One stateMachine:** `state-machine-auth-flow`
+3. **One complianceChecklist:** `compliance-owasp-top10`
+4. **One pattern:** `pattern-idempotency-key`
+5. **Derived (lineage):** register parents first, then:
+   - `synthesis-secure-api-design` (parents: constant-time-comparison, rate-limiting, input-validation)
+   - `synthesis-auth-patterns` (parents: auth-flow, token-lifecycle, token-rotation)
+   - `adaptation-retry-to-queue` (parent: practice-retry-exponential-backoff)
+   - `enhancement-circuit-breaker-observability` (parent: practice-circuit-breaker)
+
+That gives roots of each kind plus derived KBs so the subgraph `parents` array and lineage queries return real data.
 
 ## Registration Order
 

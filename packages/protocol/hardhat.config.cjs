@@ -1,4 +1,5 @@
 require("@nomicfoundation/hardhat-toolbox");
+require("dotenv").config({ path: require("path").join(__dirname, ".env") });
 
 module.exports = {
   solidity: {
@@ -23,7 +24,14 @@ module.exports = {
     "base-sepolia": {
       url: process.env.BASE_SEPOLIA_RPC_URL || "https://sepolia.base.org",
       chainId: 84532,
-      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : []
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+      ...(process.env.BASE_SEPOLIA_GAS_PRICE && { gasPrice: parseInt(process.env.BASE_SEPOLIA_GAS_PRICE, 10) })
+    },
+    sepolia: {
+      url: process.env.SEPOLIA_RPC_URL || "https://rpc.sepolia.org",
+      chainId: 11155111,
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+      ...(process.env.SEPOLIA_GAS_PRICE && { gasPrice: parseInt(process.env.SEPOLIA_GAS_PRICE, 10) })
     }
   },
   paths: {

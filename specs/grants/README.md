@@ -1,25 +1,18 @@
-# Milestone 1 — Grant reviewer entry point
+# Grant reviewer entry point
 
-Single place for reviewers. All details live in the linked docs.
+One place for reviewers: M1 (done) and M2 (planned), separated clearly. Links only what matters.
 
 ---
 
-## Start here
+## M1 — What to run
 
 From **repo root:**
 
 ```bash
 pnpm install && pnpm build && pnpm demo
 ```
-(PowerShell: `pnpm install; pnpm build; pnpm demo`)
 
-Then run the M1 demo test: `pnpm test:spec`
-
----
-
-## Commands
-
-Full list: **[COMMANDS.md](COMMANDS.md)**
+Then: `pnpm test:spec` or **`pnpm verify`** (full check: build + tests + demo).
 
 | Goal | Command |
 |------|---------|
@@ -28,21 +21,27 @@ Full list: **[COMMANDS.md](COMMANDS.md)**
 | Contract tests | `pnpm test:protocol` |
 | Deploy local | `pnpm deploy:local` |
 
+Full list: [COMMANDS.md](COMMANDS.md)
+
 ---
 
-## Key links
+## M1 — What to read
 
 | Doc | Purpose |
-|-----|---------|
-| [Main README](../../README.md) | Repo overview, M1 deliverables |
+|-----|--------|
+| [Main README](../../README.md) | Repo overview, M1 evidence, M2 planned |
 | [specs/M1-DEMO.md](../M1-DEMO.md) | What M1 proves |
 | [specs/PROTOCOL-SPEC.md](../PROTOCOL-SPEC.md) | Canonical serialization, KB types |
 | [specs/INVARIANTS.md](../INVARIANTS.md) | Protocol and economic invariants |
 | [specs/ARCHITECTURE.md](../ARCHITECTURE.md) | Core vs runtime, testing |
-| [specs/TROUBLESHOOTING.md](../TROUBLESHOOTING.md) | Windows, Node versions |
-| [REVIEW.md](REVIEW.md) | Reviewer notes, CLI `--`, troubleshooting |
-| [AUDIT-READINESS.md](AUDIT-READINESS.md) | Nine-pillar self-assessment |
+| [specs/TROUBLESHOOTING.md](../TROUBLESHOOTING.md) | Windows, Node |
+| [REVIEW.md](REVIEW.md) | Reviewer notes |
+| [AUDIT-READINESS.md](AUDIT-READINESS.md) | Self-assessment |
 
-**More:** [specs/ECONOMIC-ASSUMPTIONS.md](../ECONOMIC-ASSUMPTIONS.md), [specs/GAS.md](../GAS.md), [specs/TESTNET-ADDRESSES.md](../TESTNET-ADDRESSES.md), [specs/serialization-test-vectors.md](../serialization-test-vectors.md), [test-vectors/canonical/](../../test-vectors/canonical/), [subgraph/README.md](../../subgraph/README.md).
+Testnet: [specs/TESTNET-ADDRESSES.md](../TESTNET-ADDRESSES.md). Subgraph: [subgraph/README.md](../../subgraph/README.md).
 
-**M2 (Sepolia, roadmap, video script):** [specs/m2/](../m2/)
+---
+
+## M2 — Planned only
+
+M2 is **not built**. One sentence: slash/deprecation, query metrics in subgraph, smart-account compatibility (ERC-165/1271/EIP-712), demo on testnet. Details: [specs/m2/](../m2/).

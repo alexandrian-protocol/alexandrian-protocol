@@ -10,6 +10,7 @@
     "alex": "pnpm --filter @alexandrian/sdk exec node dist/bin/run.js",
     "build": "pnpm --filter @alexandrian/protocol --filter @alexandrian/pipeline --filter @alexandrian/sdk --filter @alexandrian/api run build",
     "test": "pnpm test:protocol && pnpm test:spec && pnpm test:integration",
+    "test:e2e": "pnpm build && pnpm test:protocol && pnpm test:spec && pnpm test:integration",
     "test:protocol": "pnpm exec hardhat test --config packages/protocol/hardhat.config.cjs",
     "test:spec": "vitest run tests/unit/ tests/invariants/ tests/demo-walkthrough/m1-demo.test.ts",
     "test:invariants": "vitest run tests/invariants/",
@@ -23,6 +24,7 @@
     "deploy:local": "pnpm --filter @alexandrian/protocol deploy:local",
     "deploy:docker": "docker compose -f docker/docker-compose.yml run --rm -e CHAIN_RPC_URL=http://blockchain:8545 blockchain npx hardhat run scripts/deploy.cjs --network docker",
     "deploy:testnet": "pnpm exec hardhat run packages/protocol/scripts/deploy-testnet.cjs --network base-sepolia --config packages/protocol/hardhat.config.cjs",
+    "deploy:testnet:sepolia": "pnpm exec hardhat run packages/protocol/scripts/deploy-testnet.cjs --network sepolia --config packages/protocol/hardhat.config.cjs",
     "start": "pnpm --filter @alexandrian/api start",
     "dev": "pnpm --filter @alexandrian/api dev",
     "demo": "pnpm exec vitest run tests/demo-walkthrough/ingestion.test.ts --reporter=verbose",
@@ -32,7 +34,9 @@
     "test:pipeline": "node scripts/test-pipeline.mjs",
     "generate:test-vectors": "node scripts/generate-test-vector-expected.mjs",
     "subgraph:codegen": "pnpm --filter alexandrian-protocol-subgraph run codegen",
-    "subgraph:build": "pnpm --filter alexandrian-protocol-subgraph run build"
+    "subgraph:build": "pnpm --filter alexandrian-protocol-subgraph run build",
+    "subgraph:deploy": "node scripts/subgraph-deploy.cjs",
+    "register:seeds": "node scripts/register-seeds-testnet.mjs"
   },
   "devDependencies": {
     "hardhat": "^2.28.0",

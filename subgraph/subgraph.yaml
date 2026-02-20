@@ -11,9 +11,9 @@ dataSources:
     network: base-sepolia
     source:
       # Replace with deployed KnowledgeRegistry address after pnpm deploy:testnet (placeholder allows codegen)
-      address: "0x3ac306aD35Ea95a0Caa78512D8E55575ae30A8b1"
+      address: "0xda1a546685C3EB8911b74e7cb8c6Cc86631BF570"
       abi: KnowledgeRegistry
-      startBlock: 37880250
+      startBlock: 37894004
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7

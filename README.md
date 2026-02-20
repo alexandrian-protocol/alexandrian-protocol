@@ -53,7 +53,7 @@ Milestone 1 establishes deterministic Knowledge Block identity, on-chain registr
 
 - Designs and operates the protocol and runtime: deploys contracts, runs Alexandria and the subgraph, and maintains tooling and docs.
 
-**Protocol Flow**
+## Protocol Flow
 
  Agent → KnowledgeRegistry (query); Registry → RoyaltyDAG → Curators; contentHash CIDv1 = canonical identity.
  

@@ -122,19 +122,32 @@ A structured, content-addressed envelope containing:
 
 ## 🧭 Architectural Stack
 
-Protocol · Library · Infrastructure · Application — see [docs/README.md](docs/README.md).
+```mermaid
+flowchart LR
+  subgraph Protocol
+    P[Alexandrian]
+  end
+  subgraph Library
+    L[Alexandria]
+  end
+  subgraph Infrastructure
+    I[Architect]
+  end
+  subgraph Application
+    A[Agents]
+  end
+  P --> L --> I --> A
+  A -->|settle| P
+  A -->|discover| L
+```
+
+**Flow:** Protocol (identity, settlement) → Library (index, query) → Infrastructure (runtime, subgraph) → Application (agents). Agents discover via Library, settle via Protocol. See [docs/README.md](docs/README.md).
 
 ---
 
 ## 🔭 Milestone 2 — Epistemic Accountability
 
-Milestone 2 introduces economic consequence and measurable trust signals at the Knowledge Block layer.
-
-It extends deterministic identity (M1) with:
-
-- stake exposure
-- demand weighting
-- verifiable agent intent
+M2 extends the Knowledge Block with economic accountability and observable trust: stake-backed publication and slashing, demand signals via settlement data (e.g. subgraph), cryptographically verifiable agent intent (e.g. EIP-712), and endorsement/slash as protocol-native reputation. The primitive’s **KB schema expands** to maximize agent usefulness and data tracking—new fields and events support demand, intent, and reputation without changing canonical identity or royalty invariants. One testnet demo in scope—and more.
 
 | Feature | Enables | Surface |
 |---------|---------|---------|

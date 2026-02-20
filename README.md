@@ -57,7 +57,7 @@ Agents discover Knowledge Blocks through Alexandria and settle economically thro
 
 **Knowledge Block** is the fundamental unit of knowledge within the Alexandrian protocol.
 
-Sstructured, content-addressed envelope containing knowledge, provenance metadata, and economic attribution information.
+Structured, content-addressed envelope containing knowledge, provenance metadata, and economic attribution information.
 
 ## Protocol Flow
 
@@ -69,7 +69,7 @@ flowchart TD
     D["Agent Intent Layer<br/>(Agents)"]
     E["Atomic Knowledge Unit<br/>(Knowledge Block)"]
 
-    A --> B --> C --> D --> E
+    A --> B --> C --> D --> E ```
 
 ---
 

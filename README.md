@@ -55,15 +55,8 @@ Milestone 1 establishes deterministic Knowledge Block identity, on-chain registr
 
 **Protocol Flow**
 
-*Chart: Agent → KnowledgeRegistry (query); Registry → RoyaltyDAG → Curators; contentHash CIDv1 = canonical identity. Renders in GitHub README.*
-
-graph LR
-  A[Agent] -->|query + payment| B[KnowledgeRegistry]
-  B -->|royalty split| C[RoyaltyDAG]
-  C -->|curator fee| D[Curator]
-  C -->|parent royalties| E[Parent Curators]
-  B -->|contentHash / CIDv1| F[Knowledge Block]
-  
+ Agent → KnowledgeRegistry (query); Registry → RoyaltyDAG → Curators; contentHash CIDv1 = canonical identity.
+ 
 ---
 
 ## Milestone 2 — Epistemic Accountability

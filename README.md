@@ -7,7 +7,6 @@ A deterministic knowledge protocol with on-chain provenance and atomic royalty s
 ## Start Here
 
 **Dependencies:** Node 20 · pnpm  
-(Full troubleshooting and commands: **alexandrian-protocol-v2 docs** on Desktop.)  
 On Windows, protocol tests can hit a known Hardhat teardown; see troubleshooting there or run them in WSL/CI.
 
 **One command from scratch (clone → install deps → build → demo):**
@@ -48,7 +47,7 @@ Defines the primitive — a **Knowledge Block** with canonical identity, enforce
 
 Indexes, organizes, and exposes Knowledge Blocks for discovery and query. It implements access logic but does not define protocol rules.
 
-**Architect (operator)** is the runtime operator.
+**Architect (Operator)** is the runtime operator.
 
 Designs and operates the protocol and runtime (Alexandria, subgraph, tooling). The rules give the Architect no privileged role in settlement, ranking, or discovery; all curators are treated identically on-chain.
 

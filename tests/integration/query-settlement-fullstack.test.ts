@@ -20,6 +20,7 @@ const MOCK_REGISTRY = process.env.MOCK_REGISTRY ?? "1";
 const RUN_ROYALTY_FLOW = process.env.RUN_ROYALTY_FLOW ?? "1";
 const RUN_PAYMENT_FLOW = process.env.RUN_PAYMENT_FLOW ?? "1";
 const AGENT_WALLET = process.env.AGENT_WALLET ?? "0x70997970C51812dc3A010C7d01b50e0d17dc79C8";
+// Hardhat test account #1; use AGENT_PRIVATE_KEY env for testnet.
 const AGENT_PRIVATE_KEY =
   process.env.AGENT_PRIVATE_KEY ?? "0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d1";
 
@@ -27,9 +28,8 @@ const hasStack =
   (RUN_ROYALTY_FLOW === "1" || RUN_PAYMENT_FLOW === "1") &&
   (MOCK_REGISTRY === "1" || (!!process.env.REGISTRY_ADDRESS && !!process.env.TOKEN_ADDRESS));
 
-// Skipped in Milestone 1: depends on full API runtime.
-// Enabled in Milestone 2 when API layer is included.
-describe.sequential.skip("Flow 2 & 3: Full stack — requires API package (Milestone 2)", () => {
+// Deferred: requires full API layer.
+describe.sequential.skip("Flow 2 & 3: Full stack — requires full API layer", () => {
   it.skipIf(!hasStack || RUN_ROYALTY_FLOW !== "1")(
     "Flow 2: should ingest, query with ledger, and return payout/splits/rs/freshness",
     async () => {

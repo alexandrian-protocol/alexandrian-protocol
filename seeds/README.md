@@ -65,4 +65,4 @@ node scripts/seed-compute-hashes.mjs
 
 ## Usage
 
-Use `@alexandrian/protocol` `contentHashFromEnvelope(envelope)` to verify hashes. For on-chain registration, run the seed script (see [scripts/README.md](../scripts/README.md)).
+Use `@alexandrian/protocol` `contentHashFromEnvelope(envelope)` to verify hashes. For on-chain registration, run the seed script (see **alexandrian-protocol-v2 docs** on Desktop → scripts/README).

@@ -3,7 +3,7 @@
  *
  * Produces fully enriched KnowledgeBlocks ready for:
  *   - Semantic retrieval (embedding + entity filters)
- *   - KYA quality scoring (qualityScore field, wired to oracle later)
+ *   - Quality scoring (qualityScore field)
  *   - Derivation chains (documentId + parentId)
  *   - Hybrid search (keywords for BM25 + vectors for semantic)
  *   - Curator dashboard display (chunkType, importance, entityMap)
@@ -56,12 +56,7 @@ export interface KnowledgeBlock {
   entityDetails: Entity[];
 
   // ── Quality ───────────────────────────────────────────────────────────────
-  /**
-   * Quality score 0–100.
-   * Stub: computed from heuristics (entity density, importance, word count).
-   * Future: wired to KYA outcome oracle — agents report whether this block
-   * degraded or improved their output.
-   */
+  /** Quality score 0–100 (heuristic: entity density, importance, word count). */
   qualityScore: number;
 
   // ── Embeddings ────────────────────────────────────────────────────────────
@@ -144,12 +139,8 @@ function extractKeywords(
 // ─── Quality Score Heuristic ──────────────────────────────────────────────────
 
 /**
- * Stub quality score — 0 to 100.
+ * Heuristic quality score — 0 to 100.
  * Based on: entity density, importance, word count, chunk completeness.
- *
- * Future: replace with outcome oracle signal from KYA staking.
- * When an agent reports a block degraded its output → qualityScore decreases.
- * When a curator's stake is slashed → qualityScore for that KB drops.
  */
 function computeQualityScore(
   importance: number,
@@ -212,7 +203,7 @@ export class Processor {
       // Summary
       const summary = summarize(sc.text);
 
-      // Quality score (stub — oracle wires in later)
+      // Quality score (heuristic)
       const qualityScore = computeQualityScore(
         sc.importance,
         entityDetails.filter(e => e.confidence > 0.7).length,

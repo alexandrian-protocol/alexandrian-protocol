@@ -1,5 +1,5 @@
 /**
- * Merkle helpers — minimal stub for proof verification.
+ * Merkle helpers — minimal implementation for proof verification.
  * Used by tests/integration/ai-usage-proof.test.ts when importing from api.
  */
 

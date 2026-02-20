@@ -12,7 +12,7 @@
  * Requires: API runtime (ingest, query, ledger). Uses MOCK_REGISTRY=1 by default.
  *
  * Skipped in Milestone 1: depends on full API runtime.
- * Enabled in Milestone 2 when API layer is included.
+ * Deferred: requires full API layer.
  */
 import { describe, it, expect, beforeAll } from "vitest";
 import request from "supertest";
@@ -39,7 +39,7 @@ const flow: {
   balAfter?: number;
 } = {};
 
-describe.skip("Flow: AI usage proof (AI-native proof loop) — requires API (Milestone 2)", () => {
+describe.skip("Flow: AI usage proof (AI-native proof loop) — requires full API layer", () => {
   beforeAll(async () => {
     const { app } = await import("../../packages/api/server.js");
 

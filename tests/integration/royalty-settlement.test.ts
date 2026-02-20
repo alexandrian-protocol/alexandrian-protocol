@@ -21,7 +21,7 @@ const hasStack =
 
 describe("Flow 2: Royalty", () => {
   // Skipped in Milestone 1: depends on full API runtime.
-  // Enabled in Milestone 2 when API layer is included.
+  // Deferred: requires full API layer.
   it.skip(
     "use flow-2-3-fullstack.test.ts for full-stack runs",
     async () => {

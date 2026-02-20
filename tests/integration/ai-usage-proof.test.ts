@@ -5,7 +5,7 @@
  *   1. Returned chunks verify against merkleRoot (Merkle proof per chunk)
  *   2. servedChunkHashes match returned content (hash(chunk) === servedChunkHash)
  *   3. receipt recomputes exactly (hashLeaf(JSON.stringify(receipt)) === receiptHash)
- *   4. (Future) on-chain payment event includes receiptHash — when Registry.settleQuery emits it
+ *   4. On-chain payment event includes receiptHash when Registry.settleQuery emits it
  *   5. Balances reflect payment (ledger balance increased for curator)
  *
  * Unskip with: RUN_AI_USAGE_PROOF=1 pnpm test:integration
@@ -26,9 +26,8 @@ const hasStack =
   process.env.RUN_AI_USAGE_PROOF === "1" &&
   ((process.env.MOCK_REGISTRY ?? "1") === "1" || (!!process.env.REGISTRY_ADDRESS && !!process.env.TOKEN_ADDRESS));
 
-// Skipped in Milestone 1: depends on full API runtime.
-// Enabled in Milestone 2 when API layer is included.
-describe.skip("Flow: AI usage proof — requires API package (Milestone 2)", () => {
+// Deferred: requires full API layer.
+describe.skip("Flow: AI usage proof — requires full API layer", () => {
   it(
     "should return verifiable proof loop: merkleRoot, servedChunkHashes, receipt, balances",
     async () => {

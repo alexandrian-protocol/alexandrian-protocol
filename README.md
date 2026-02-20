@@ -1,160 +1,156 @@
-🚀 Start Here
-Requirements
+# Alexandria
 
-Node.js 20
+A deterministic knowledge protocol with on-chain provenance and atomic royalty settlement.
 
-pnpm
+---
 
-(Windows) Hardhat teardown issue may occur — use WSL or CI if needed.
+## 🚀 Start Here
 
-One Command Setup
+### Requirements
 
-Clone → install → build → run demo:
+- **Node.js 20** (LTS)
+- **pnpm**
+- **Windows:** Protocol tests may hit a known Hardhat teardown; use WSL or CI if needed.
 
+### One-command setup
+
+Run the block below for the full setup (clone → enter repo → install deps → build → demo). The third line, `pnpm start:here`, runs install, build, and demo.
+
+```bash
 git clone https://github.com/alexandrian-protocol/alexandrian-protocol.git
 cd alexandrian-protocol
 pnpm start:here
-Already cloned?
-pnpm start:here
-Manual steps
+```
+
+**Already cloned?** Run `pnpm start:here` (install → build → demo).
+
+### Manual steps
+
+If you prefer to run each step yourself:
+
+```bash
 pnpm install
 pnpm build
 pnpm demo
-✅ Milestone 1 — Complete
+```
+
+---
+
+![Milestone](https://img.shields.io/badge/M1-complete-blue)
+
+## ✅ Milestone 1 — Complete
 
 Milestone 1 establishes:
 
-Deterministic Knowledge Block identity
+- Deterministic Knowledge Block identity
+- On-chain registration
+- Atomic settlement
+- Indexable lineage
 
-On-chain registration
+### Guarantees
 
-Atomic settlement
+| Guarantee | Enforced By | Proof |
+|-----------|-------------|-------|
+| Deterministic kbId | Canonical serialization invariant | `pnpm test:spec` |
+| Stable contentHash + CIDv1 | Canonical byte derivation | `pnpm test:spec` |
+| Unique on-chain registration | KnowledgeRegistry immutability | `pnpm test:protocol` |
+| Atomic settlement (98/2) | Transaction-level execution | `pnpm test:protocol` |
+| Royalty propagation | RoyaltyDAG deterministic routing | `pnpm test:protocol` |
+| Schema validation | Graph integrity enforcement | `pnpm test:spec` |
+| Queryable lineage | Subgraph indexing | [subgraph/](subgraph/README.md) |
 
-Indexable lineage
+---
 
-Guarantees
-Guarantee	Enforced By	Proof
-Deterministic kbId	Canonical serialization invariant	pnpm test:spec
-Stable contentHash + CIDv1	Canonical byte derivation	pnpm test:spec
-Unique on-chain registration	KnowledgeRegistry immutability	pnpm test:protocol
-Atomic settlement (98/2)	Transaction-level execution	pnpm test:protocol
-Royalty propagation	RoyaltyDAG deterministic routing	pnpm test:protocol
-Schema validation	Graph integrity enforcement	pnpm test:spec
-Queryable lineage	Subgraph indexing	subgraph
-🏗 Architecture Overview
+## 🏗 Architecture Overview
 
-See full definitions → docs/README.md
+See full definitions → [docs/README.md](docs/README.md)
 
-The Alexandrian system separates protocol enforcement, infrastructure operation, and application intent into distinct layers.
+Alexandrian separates protocol enforcement, infrastructure operation, and application intent into distinct layers.
 
-Components
-Alexandrian — Protocol Layer
+### Components
+
+**Alexandrian — Protocol Layer**
 
 Defines the protocol primitive — the Knowledge Block — providing:
 
-Canonical identity
-
-Enforceable provenance
-
-Atomic royalty settlement
+- Canonical identity
+- Enforceable provenance
+- Atomic royalty settlement
 
 Identity is deterministic. State transitions are immutable.
 
-Alexandria — Library Layer
+**Alexandria — Library Layer**
 
 Indexes and exposes Knowledge Blocks for discovery and query.
 
-Implements access and indexing logic
+- Implements access and indexing logic
+- Does not define protocol rules
+- Does not influence settlement
 
-Does not define protocol rules
-
-Does not influence settlement
-
-Architect (Operator) — Infrastructure
+**Architect (Operator) — Infrastructure**
 
 Operates runtime infrastructure:
 
-Alexandria runtime
-
-Subgraph indexing
-
-Tooling and services
+- Alexandria runtime
+- Subgraph indexing
+- Tooling and services
 
 Protocol rules grant no privileged authority in settlement, ranking, or discovery.
 
-Agents (Scribes) — Application Layer
+**Agents (Scribes) — Application Layer**
 
 Independent participants that:
 
-Discover Knowledge Blocks via Alexandria
+- Discover Knowledge Blocks via Alexandria
+- Settle economically via Alexandrian
 
-Settle economically via Alexandrian
-
-Discovery is application-layer logic.
-Enforcement is protocol-layer logic.
+Discovery is application-layer logic.  
+Enforcement is protocol-layer logic.  
 Intent remains agent-defined.
 
-Knowledge Block — Protocol Primitive
+### Knowledge Block — Protocol Primitive
 
 The fundamental unit of knowledge.
 
 A structured, content-addressed envelope containing:
 
-knowledge payload
+- knowledge payload
+- provenance metadata
+- economic attribution
 
-provenance metadata
+---
 
-economic attribution
+## 🧭 Architectural Stack
 
-🧭 Architectural Stack
-🔭 Milestone 2 — Epistemic Accountability
+Protocol · Library · Infrastructure · Application — see [docs/README.md](docs/README.md).
+
+---
+
+## 🔭 Milestone 2 — Epistemic Accountability
 
 Milestone 2 introduces economic consequence and measurable trust signals at the Knowledge Block layer.
 
 It extends deterministic identity (M1) with:
 
-stake exposure
+- stake exposure
+- demand weighting
+- verifiable agent intent
 
-demand weighting
+| Feature | Enables | Surface |
+|---------|---------|---------|
+| totalFeesEarned | On-chain demand signal | Registry + subgraph |
+| Endorsements | Multi-curator consensus | Protocol events |
+| Slashing | Economic penalties | KBDeprecated → slash() |
+| EIP-712 signing | Verifiable agent intent | Signed settlement |
+| ERC-8004 compatibility | Agent interoperability | Interface layer |
+| Base Sepolia subgraph | Public queryability | Graph Studio |
 
-verifiable agent intent
+See [docs/milestones/](docs/milestones/) for reviewer entry.
 
-Feature	Enables	Surface
-totalFeesEarned	On-chain demand signal	Registry + subgraph
-Endorsements	Multi-curator consensus	Protocol events
-Slashing	Economic penalties	KBDeprecated → slash()
-EIP-712 signing	Verifiable agent intent	Signed settlement
-ERC-8004 compatibility	Agent interoperability	Interface layer
-Base Sepolia subgraph	Public queryability	Graph Studio
-📄 License
+---
 
-MIT — see LICENSE
+## 📄 License
 
-🎯 What Improved
-1️⃣ Visual Scanning
+MIT — see [LICENSE](LICENSE).
 
-Readers now see:
-
-Start → Proof → Architecture → Future
-
-which matches reviewer cognition.
-
-2️⃣ Architecture Feels Real
-
-Components are grouped logically instead of appearing as paragraphs.
-
-3️⃣ Protocol Tone Increased
-
-Bullets emphasize capabilities, not prose.
-
-4️⃣ GitHub Native Formatting Only
-
-No custom HTML required → renders perfectly everywhere.
-
-⭐ Optional High-Impact Upgrade
-
-Add badges at top:
-
-![Build](https://img.shields.io/badge/build-passing-brightgreen)
-![Milestone](https://img.shields.io/badge/M1-complete-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)

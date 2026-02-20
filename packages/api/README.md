@@ -1,11 +1,8 @@
 # @alexandrian/api
 
-Minimal API stub for **Milestone 1**. Serves `/` and `/health` so the Docker stack can run without a full backend.
+Minimal API surface for Docker and health checks. Serves `/` and `/health`; other routes return 503 until implemented.
 
-This stub exists solely to support demo orchestration in Milestone 1. Core protocol logic lives in `packages/protocol` and is tested independently.
-
-- **M1:** Stub only — no ingest, query, or ledger. Other routes return 503.
-- **M2:** Full implementation (ingest, query, ledger, Merkle proofs, etc.).
+Core protocol logic lives in `packages/protocol` and is tested independently.
 
 ## Build & run
 

@@ -261,7 +261,7 @@ export function extractEntitiesTyped(text: string): Entity[] {
 }
 
 /**
- * Simple string-only API — drop-in replacement for the old extractEntities stub.
+ * Simple string-only API — drop-in replacement for the old minimal extractEntities implementation.
  * Returns entity text strings for backward compatibility.
  */
 export function extractEntities(text: string): string[] {

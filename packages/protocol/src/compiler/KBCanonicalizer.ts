@@ -1,7 +1,7 @@
 /**
  * KBCanonicalizer — canonical compilation / typed extraction.
- * Milestone 2: Migrate from packages/pipeline. Use @alexandrian/pipeline for now.
+ * Use @alexandrian/pipeline for full implementation.
  */
 export class KBCanonicalizer {
-  // Placeholder — implement or re-export from pipeline
+  // Placeholder — re-export or implement from pipeline
 }

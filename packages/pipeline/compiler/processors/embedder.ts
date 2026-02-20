@@ -209,7 +209,7 @@ export function createEmbedder(): Embedder {
   if (process.env.OPENAI_API_KEY)  return new OpenAIEmbedder();
   if (process.env.COHERE_API_KEY)  return new CohereEmbedder();
 
-  console.log('[Embedder] Running in stub mode (M1). Semantic providers optional.');
+  console.log('[Embedder] Running in stub mode. Semantic providers optional.');
   return new StubEmbedder();
 }
 

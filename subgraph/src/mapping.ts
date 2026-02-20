@@ -1,6 +1,6 @@
 /**
  * Alexandrian Protocol — KnowledgeRegistry subgraph mapping.
- * M1: KBRegistered only. M2: KBQueried, KBDeprecated — see subgraph/m2/.
+ * Indexes KBRegistered. Additional event handlers in subgraph/m2/.
  */
 import { Bytes } from "@graphprotocol/graph-ts";
 import { KBRegistered } from "../generated/KnowledgeRegistry/KnowledgeRegistry";

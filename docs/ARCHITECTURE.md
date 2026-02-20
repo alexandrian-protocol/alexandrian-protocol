@@ -7,7 +7,7 @@
 ## Principle
 
 - **Protocol** = core spec: canonical hashing, economic invariants, ledger math, Merkle proofs, VirtualRegistry, contracts. Lives in `packages/protocol` and in **local deterministic test helpers** under `tests/`.
-- **API** = runtime surface: Express server, env, ports, server lifecycle. Lives in `packages/api` (minimal stub in M1, full in M2).
+- **API** = runtime surface: Express server, env, ports, server lifecycle. Lives in `packages/api` (minimal surface now; full implementation later).
 
 Milestone reviewers care about the **core**. The API is a runtime detail.
 
@@ -35,7 +35,7 @@ They must **not**:
 |-------------|------------------------|-------------------------------------------|
 | Protocol    | `packages/protocol`    | Spec, contracts, canonical, invariants   |
 | Test helpers| `tests/invariants/`, `tests/integration/` | Pure helpers (ledger, merkle) for core tests |
-| API         | `packages/api`         | Runtime surface (stub in M1)             |
+| API         | `packages/api`         | Runtime surface (minimal; full impl later) |
 
 Integration tests that **hit the API** (ingest, query, ledger HTTP) may import the server app; the **validation logic** (e.g. Merkle proof verification) still uses local helpers, not the API package.
 
@@ -49,6 +49,6 @@ Integration tests that **hit the API** (ingest, query, ledger HTTP) may import t
 
 ## Quality
 
-- **Protocol core** (`packages/protocol/src`): No `console.*`, no `process.env` mutation, no TODO (use "Milestone 2:" in comments).
-- **Tests**: No env mutation; use local constants or read-only `process.env.X ?? default`. Skips are documented (M1/M2 comments) and allowlisted in CI.
+- **Protocol core** (`packages/protocol/src`): No `console.*`, no `process.env` mutation; use short tags (e.g. deferred:) in comments for future work.
+- **Tests**: No env mutation; use local constants or read-only `process.env.X ?? default`. Skips are documented and allowlisted in CI.
 - **CI**: Fails if any integration test is skipped and not in the allowlist (no describe.skip hiding broken logic).

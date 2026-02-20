@@ -7,6 +7,7 @@
     "subgraph"
   ],
   "scripts": {
+    "start:here": "pnpm install && pnpm build && pnpm demo",
     "alex": "pnpm --filter @alexandrian/sdk exec node dist/bin/run.js",
     "build": "pnpm --filter @alexandrian/protocol --filter @alexandrian/pipeline --filter @alexandrian/sdk --filter @alexandrian/api run build",
     "test": "pnpm test:protocol && pnpm test:spec && pnpm test:integration",

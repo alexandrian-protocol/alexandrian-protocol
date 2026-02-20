@@ -2,7 +2,7 @@
 
 Protocol and project documentation. **Reviewer entry:** [milestones/](milestones/) — what to run, what to read.
 
-**End-to-end flow:** [E2E-TESTNET-GRAPH.md](E2E-TESTNET-GRAPH.md) — local testing → testnet deploy → The Graph.
+Dev/ops docs (troubleshooting, full command list, e2e runbook) are in **alexandrian-protocol-v2 docs** on Desktop.
 
 ---
 
@@ -14,6 +14,6 @@ Protocol and project documentation. **Reviewer entry:** [milestones/](milestones
 | [PROTOCOL-SPEC.md](PROTOCOL-SPEC.md) | Canonical serialization, KB types |
 | [INVARIANTS.md](INVARIANTS.md) | Protocol and economic invariants |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Core vs runtime, testing |
-| [troubleshooting.md](troubleshooting.md) | Node/Windows/Docker |
 | [TESTNET-ADDRESSES.md](TESTNET-ADDRESSES.md) | Deploy, env, testnet faucets |
-| [E2E-TESTNET-GRAPH.md](E2E-TESTNET-GRAPH.md) | E2E → testnet → subgraph |
+| [SUBGRAPH.md](SUBGRAPH.md) | Subgraph & GraphQL — live endpoint, example query, schema |
+| [KNOWLEDGE-BLOCKS-VALUE.md](KNOWLEDGE-BLOCKS-VALUE.md) | KB spec & ecosystem value — data + formalization |

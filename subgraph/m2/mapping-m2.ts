@@ -1,5 +1,5 @@
 /**
- * M2 mapping snippets — add to main src/mapping.ts when wiring M2.
+ * Mapping snippets for additional events — add to main src/mapping.ts when wiring.
  * Requires: BigInt from @graphprotocol/graph-ts; KBQueried, KBDeprecated from generated ABI.
  */
 

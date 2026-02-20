@@ -13,9 +13,9 @@ Short checklist and troubleshooting so reviewers get a smooth first run.
 
 ## Troubleshooting
 
-- **`ERR_PACKAGE_PATH_NOT_EXPORTED` (multiformats)** — You’re likely on Node 24. Switch to Node 20 LTS (see [troubleshooting.md](../troubleshooting.md)).
-- **`pnpm alex publish ...` does nothing / wrong error** — Use the double-dash: `pnpm alex -- publish ...`. The `--` is required so arguments are passed to the CLI. See [commands.md](commands.md) for exact copy-paste commands.
-- **Hardhat crash on Windows (UV_HANDLE_CLOSING)** — See [troubleshooting.md](../troubleshooting.md). CI runs on Linux and is unaffected. If tests *passed* and then the assertion appears, the run is still a success.
-- **One-line Vite CJS deprecation** — If you see "The CJS build of Vite's Node API is deprecated," it’s harmless. Tests are unaffected. See [troubleshooting.md](../troubleshooting.md).
+- **`ERR_PACKAGE_PATH_NOT_EXPORTED` (multiformats)** — You’re likely on Node 24. Switch to Node 20 LTS.
+- **`pnpm alex publish ...` does nothing / wrong error** — Use the double-dash: `pnpm alex -- publish ...`. The `--` is required so arguments are passed to the CLI. Copy-paste exactly as in milestones/README.
+- **Hardhat crash on Windows (UV_HANDLE_CLOSING)** — CI runs on Linux and is unaffected. If tests *passed* and then the assertion appears, the run is still a success.
+- **One-line Vite CJS deprecation** — If you see "The CJS build of Vite's Node API is deprecated," it’s harmless. Tests are unaffected.
 
-Full troubleshooting: [troubleshooting.md](../troubleshooting.md).
+Full troubleshooting and command list: **alexandrian-protocol-v2 docs** on Desktop.

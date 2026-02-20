@@ -2,7 +2,7 @@
  * Flow 3: Payment — ingest → query (on-chain) → verify XANDER transfer.
  *
  * NOTE: Use flow-2-3-fullstack.test.ts when running full-stack tests (avoids nonce conflicts).
- * This file is kept for documentation; it skips to prevent parallel ingest conflicts.
+ * For testnet, set AGENT_PRIVATE_KEY and AGENT_WALLET (use a testnet-only key).
  */
 import { describe, it, expect } from "vitest";
 import request from "supertest";
@@ -21,8 +21,7 @@ const hasStack =
   !!process.env.AGENT_WALLET;
 
 describe("Flow 3: Payment", () => {
-  // Skipped in Milestone 1: depends on full API runtime.
-  // Enabled in Milestone 2 when API layer is included.
+  // Deferred: requires full API layer.
   it.skip(
     "use flow-2-3-fullstack.test.ts for full-stack runs",
     async () => {

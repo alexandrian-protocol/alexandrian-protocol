@@ -12,7 +12,7 @@ How Alexandrian holds up against a nine-pillar protocol doctrine.
 
 - **Economic:** Cycle-free royalty DAG; path shares ≤ 100%; base royalty + parent shares ≤ 100%; distribution and obligation math in `EconomicInvariants` and `tests/invariants/economic-invariants.test.ts`.
 - **Structural:** VirtualRegistry rejects duplicate sources, cycles, unregistered parents; canonical hash independent of timestamp and source order.
-- **Ledger:** RS bounds, freshness, tier, payout, leaf hash in ledger stub and tests.
+- **Ledger:** RS bounds, freshness, tier, payout, leaf hash in ledger implementation and tests.
 
 **Gap:** Invariants are in code and tests; they are not yet listed in one place as "the set of protocol invariants" with a single source of truth (e.g. PROTOCOL-SPEC or a dedicated invariants doc).
 
@@ -87,7 +87,7 @@ How Alexandrian holds up against a nine-pillar protocol doctrine.
 
 **Alexandrian:** In place.
 
-- PROTOCOL-SPEC versioned (v2.0.0); schema roadmap (Milestone 2) documented in code.
+- PROTOCOL-SPEC versioned (v2.0.0); schema roadmap documented in code where relevant.
 - Deprecated APIs (`parentWeights`, `settle`) have JSDoc + one-time runtime `console.warn` and clear migration target (`sourceWeights`, `settleCitation`).
 
 ---

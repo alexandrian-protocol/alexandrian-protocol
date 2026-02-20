@@ -15,8 +15,8 @@ config({ path: resolve(process.cwd(), "packages/api/.env") });
 const VALID_CURATOR = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
 
 // Skipped in Milestone 1: depends on full API runtime.
-// Enabled in Milestone 2 when API layer is included.
-describe.skip("Attribution verification — requires API package (Milestone 2)", () => {
+// Deferred: requires full API layer.
+describe.skip("Attribution verification — requires full API layer", () => {
   it("returns the same curator on GET /api/blocks/:contentHash as was set at ingest", async () => {
     const { app } = await import("../../packages/api/server.js");
     const ingestRes = await request(app)

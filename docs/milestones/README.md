@@ -11,8 +11,10 @@ One place for reviewers: M1 (done) and M2 (planned), separated clearly. Links on
 From **repo root:**
 
 ```bash
-pnpm install && pnpm build && pnpm demo
+pnpm start:here
 ```
+
+(This runs install → build → demo. Or step by step: `pnpm install && pnpm build && pnpm demo`.)
 
 Then: `pnpm test:spec` or **`pnpm verify`** (full check: build + tests + demo).
 
@@ -23,7 +25,7 @@ Then: `pnpm test:spec` or **`pnpm verify`** (full check: build + tests + demo).
 | Contract tests | `pnpm test:protocol` |
 | Deploy local | `pnpm deploy:local` |
 
-Full list: [commands.md](commands.md)
+Full command list and troubleshooting: see **alexandrian-protocol-v2 docs** on Desktop.
 
 ---
 
@@ -36,11 +38,11 @@ Full list: [commands.md](commands.md)
 | [PROTOCOL-SPEC.md](../PROTOCOL-SPEC.md) | Canonical serialization, KB types |
 | [INVARIANTS.md](../INVARIANTS.md) | Protocol and economic invariants |
 | [ARCHITECTURE.md](../ARCHITECTURE.md) | Core vs runtime, testing |
-| [troubleshooting.md](../troubleshooting.md) | Windows, Node |
 | [REVIEW.md](REVIEW.md) | Reviewer notes |
 | [AUDIT-READINESS.md](AUDIT-READINESS.md) | Self-assessment |
+| [SUBGRAPH.md](../SUBGRAPH.md) | Subgraph & GraphQL — live endpoint, example query |
 
-Testnet: [TESTNET-ADDRESSES.md](../TESTNET-ADDRESSES.md). Subgraph: [subgraph/README.md](../../subgraph/README.md).
+Testnet: [TESTNET-ADDRESSES.md](../TESTNET-ADDRESSES.md). Subgraph: [SUBGRAPH.md](../SUBGRAPH.md) (live query) or [subgraph/README.md](../../subgraph/README.md) (build/deploy).
 
 ---
 

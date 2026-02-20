@@ -14,9 +14,9 @@ packages/protocol/
 │   ├── core/              # VirtualRegistry, fingerprint, license, invariants
 │   ├── schema/            # CanonicalEnvelope, KnowledgeBlock, etc.
 │   ├── validation/        # invariants, conformance
-│   ├── compiler/          # (placeholder — migrate from pipeline)
-│   ├── sdk/               # (placeholder — migrate from sdk package)
-│   └── semanticIndex/     # (placeholder — migrate from API)
+│   ├── compiler/          # Use @alexandrian/pipeline for full implementation
+│   ├── sdk/               # Use @alexandrian/sdk for full implementation
+│   └── semanticIndex/     # Use API package for full implementation
 ├── contracts/             # Solidity
 ├── dist/                  # Build output
 └── docs/API.md

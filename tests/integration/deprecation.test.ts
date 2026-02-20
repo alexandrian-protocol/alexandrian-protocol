@@ -11,7 +11,7 @@ import { describe, it, expect } from "vitest";
 
 describe("Flow: Deprecation", () => {
   // Skipped in Milestone 1: depends on Registry KBDeprecated support.
-  // Enabled in Milestone 2 when contract emits KBDeprecated and stores supersededBy.
+  // Deferred: requires KBDeprecated event and supersededBy.
   it.skip(
     "deprecates original KB and links supersededBy (requires Registry KBDeprecated support)",
     async () => {

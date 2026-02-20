@@ -1,7 +1,7 @@
 /**
  * SemanticIndex — vector search.
- * Milestone 2: Migrate from packages/api. Use API search/embeddingCache for now.
+ * Use API package search/embeddingCache for full implementation.
  */
 export class SemanticIndex {
-  // Placeholder — implement or re-export from API services
+  // Placeholder — re-export or implement from API services
 }

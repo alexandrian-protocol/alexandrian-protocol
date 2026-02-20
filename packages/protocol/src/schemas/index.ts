@@ -1,9 +1,5 @@
 /**
  * Zod schemas for each KB type.
- *
- * Milestone 2: Tighten validation (deeper shapes, stricter literals) for
- * synthesis, adaptation, enhancement, complianceChecklist, pattern, rubric,
- * stateMachine, feature, promptEngineering.
  */
 export * from "./base.js";
 export * from "./practice.js";

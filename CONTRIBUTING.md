@@ -18,7 +18,7 @@ See [README.md](README.md) and [docs/milestones/](docs/milestones/) for reviewer
 
 ## Commit history
 
-Keep history clean: no secrets, no generated artifacts. If you use Cursor (or similar), disable **“Add co-author to commits”** in settings so commit messages stay minimal.
+Keep history clean: no secrets, no generated artifacts.
 
 ## Repo description & topics
 

@@ -69,8 +69,8 @@ flowchart TD
     D["Agent Intent Layer<br/>(Agents)"]
     E["Atomic Knowledge Unit<br/>(Knowledge Block)"]
 
-    A --> B --> C --> D --> E ```
-
+    A --> B --> C --> D --> E
+```
 ---
 
 ## Milestone 2 — Epistemic Accountability

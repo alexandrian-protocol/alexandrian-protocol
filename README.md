@@ -61,15 +61,15 @@ Sstructured, content-addressed envelope containing knowledge, provenance metadat
 
 ## Protocol Flow
 
-Protocol (Alexandrian)
-        ↓
-Library (Alexandria)
-        ↓
-Operator (Architect)
-        ↓
-Application Actors (Agents)
-        ↓
-Protocol Primitive (Knowledge Block).
+```mermaid
+flowchart TD
+    A["Protocol Rules<br/>(Alexandrian)"]
+    B["Index & Access Layer<br/>(Alexandria)"]
+    C["Runtime Infrastructure<br/>(Architect)"]
+    D["Agent Intent Layer<br/>(Agents)"]
+    E["Atomic Knowledge Unit<br/>(Knowledge Block)"]
+
+    A --> B --> C --> D --> E
 
 ---
 

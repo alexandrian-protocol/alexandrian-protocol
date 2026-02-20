@@ -59,7 +59,7 @@ Agents discover Knowledge Blocks through Alexandria and settle economically thro
 
 Structured, content-addressed envelope containing knowledge, provenance metadata, and economic attribution information.
 
-## Protocol Flow
+## Architectural Stack
 
 ```mermaid
 flowchart TD

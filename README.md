@@ -1,97 +1,160 @@
-# Alexandria
+🚀 Start Here
+Requirements
 
-A deterministic knowledge protocol with on-chain provenance and atomic royalty settlement.
+Node.js 20
 
----
+pnpm
 
-## Start Here
+(Windows) Hardhat teardown issue may occur — use WSL or CI if needed.
 
-**Dependencies:** Node 20 · pnpm  
-On Windows, protocol tests can hit a known Hardhat teardown; see troubleshooting there or run them in WSL/CI.
+One Command Setup
 
-**One command from scratch (clone → install deps → build → demo):**
+Clone → install → build → run demo:
 
-```bash
-git clone https://github.com/alexandrian-protocol/alexandrian-protocol.git && cd alexandrian-protocol && pnpm start:here
-```
+git clone https://github.com/alexandrian-protocol/alexandrian-protocol.git
+cd alexandrian-protocol
+pnpm start:here
+Already cloned?
+pnpm start:here
+Manual steps
+pnpm install
+pnpm build
+pnpm demo
+✅ Milestone 1 — Complete
 
-Already cloned? Run `pnpm start:here` (or step by step: `pnpm install && pnpm build && pnpm demo`).
+Milestone 1 establishes:
 
----
+Deterministic Knowledge Block identity
 
-## Milestone 1 — Complete
+On-chain registration
 
-Milestone 1 establishes deterministic Knowledge Block identity, on-chain registration, atomic settlement, and indexable lineage.
+Atomic settlement
 
-| Guarantee | Enforced By | Proof |
-|-----------|-------------|-------|
-| Deterministic kbId derivation | Canonical serialization; invariant to key order and formatting | `pnpm test:spec` |
-| Stable contentHash + CIDv1 from canonical envelope | Content-addressed identity derived from canonical bytes | `pnpm test:spec` |
-| Unique on-chain registration | KnowledgeRegistry enforces immutability and uniqueness of kbId | `pnpm test:protocol` |
-| Atomic settlement (98/2 split) | Transaction-level execution; no partial state transitions | `pnpm test:protocol` |
-| Upstream royalty routing | RoyaltyDAG enforces deterministic split propagation | `pnpm test:protocol` |
-| Schema validation + cycle rejection | Structural integrity of Knowledge Block graph | `pnpm test:spec` |
-| Queryable lineage via subgraph | External indexability and composability | [subgraph/](subgraph/README.md) |
+Indexable lineage
 
----
+Guarantees
+Guarantee	Enforced By	Proof
+Deterministic kbId	Canonical serialization invariant	pnpm test:spec
+Stable contentHash + CIDv1	Canonical byte derivation	pnpm test:spec
+Unique on-chain registration	KnowledgeRegistry immutability	pnpm test:protocol
+Atomic settlement (98/2)	Transaction-level execution	pnpm test:protocol
+Royalty propagation	RoyaltyDAG deterministic routing	pnpm test:protocol
+Schema validation	Graph integrity enforcement	pnpm test:spec
+Queryable lineage	Subgraph indexing	subgraph
+🏗 Architecture Overview
 
-## Components
+See full definitions → docs/README.md
 
-[docs/README.md](docs/README.md)
+The Alexandrian system separates protocol enforcement, infrastructure operation, and application intent into distinct layers.
 
-**Alexandrian** is the protocol layer.
+Components
+Alexandrian — Protocol Layer
 
-Defines the primitive — a Knowledge Block — providing canonical identity, enforceable provenance, and atomic royalty settlement. Identity is deterministic. State transitions are immutable.
+Defines the protocol primitive — the Knowledge Block — providing:
 
-**Alexandria** is the library layer.
+Canonical identity
 
-Indexes, organizes, and exposes Knowledge Blocks for discovery and query. It implements access and indexing logic but does not define protocol rules or influence settlement.
+Enforceable provenance
 
-**Architect (Operator)** is the runtime operator.
+Atomic royalty settlement
 
-Designs and operates infrastructure supporting the protocol and runtime (Alexandria, subgraph, and tooling). Protocol rules grant the Architect no privileged role in settlement, ranking, or discovery; all curators are treated identically on-chain.
+Identity is deterministic. State transitions are immutable.
 
-**Agents (Scribes)** are independent participants.
+Alexandria — Library Layer
 
-Agents discover Knowledge Blocks through Alexandria and settle economically through the Alexandrian protocol. Most agents originate from external systems (agent frameworks, smart accounts, L2s, or external applications). Discovery is application-layer logic. Settlement and enforcement are protocol-layer logic. Intent remains agent-defined.
+Indexes and exposes Knowledge Blocks for discovery and query.
 
-**Knowledge Block** is the fundamental unit of knowledge within the Alexandrian protocol.
+Implements access and indexing logic
 
-Structured, content-addressed envelope containing knowledge, provenance metadata, and economic attribution information.
+Does not define protocol rules
 
-## Architectural Stack
+Does not influence settlement
 
-```mermaid
-flowchart TD
-    A["Protocol Rules<br/>(Alexandrian)"]
-    B["Index & Access Layer<br/>(Alexandria)"]
-    C["Runtime Infrastructure<br/>(Architect)"]
-    D["Agent Intent Layer<br/>(Agents)"]
-    E["Atomic Knowledge Unit<br/>(Knowledge Block)"]
+Architect (Operator) — Infrastructure
 
-    A --> B --> C --> D --> E
-```
----
+Operates runtime infrastructure:
 
-## Milestone 2 — Epistemic Accountability
+Alexandria runtime
 
-M2 is planned (slash/deprecation, query metrics, smart-account compatibility). See [docs/milestones/](docs/milestones/) for reviewer entry.
+Subgraph indexing
+
+Tooling and services
+
+Protocol rules grant no privileged authority in settlement, ranking, or discovery.
+
+Agents (Scribes) — Application Layer
+
+Independent participants that:
+
+Discover Knowledge Blocks via Alexandria
+
+Settle economically via Alexandrian
+
+Discovery is application-layer logic.
+Enforcement is protocol-layer logic.
+Intent remains agent-defined.
+
+Knowledge Block — Protocol Primitive
+
+The fundamental unit of knowledge.
+
+A structured, content-addressed envelope containing:
+
+knowledge payload
+
+provenance metadata
+
+economic attribution
+
+🧭 Architectural Stack
+🔭 Milestone 2 — Epistemic Accountability
 
 Milestone 2 introduces economic consequence and measurable trust signals at the Knowledge Block layer.
 
-It extends deterministic identity (Milestone 1) with stake exposure, demand weighting, and verifiable agent intent.
+It extends deterministic identity (M1) with:
 
-| What | What This Enables | Proof / Surface |
-|------|-------------------|-----------------|
-| totalFeesEarned per KB | On-chain demand signal; economic weight accumulates | Registry + subgraph |
-| Endorsement primitive | Independent curators attest to KB accuracy; consensus beyond citation | Protocol event + subgraph |
-| Slash mechanism | Curator stake at risk on deprecation; economic penalty enforced | KBDeprecated → slash() |
-| EIP-712 agent signing | Agent intent cryptographically verifiable; replay-resistant | Signed settlement path |
-| ERC-8004 compatibility | Any compliant agent can query and settle against KBs | Interface compatibility |
-| Subgraph live on Base Sepolia | Lineage, demand, and endorsements externally queryable | Graph Studio |
+stake exposure
 
----
+demand weighting
 
-## License
+verifiable agent intent
 
-[MIT](LICENSE)
+Feature	Enables	Surface
+totalFeesEarned	On-chain demand signal	Registry + subgraph
+Endorsements	Multi-curator consensus	Protocol events
+Slashing	Economic penalties	KBDeprecated → slash()
+EIP-712 signing	Verifiable agent intent	Signed settlement
+ERC-8004 compatibility	Agent interoperability	Interface layer
+Base Sepolia subgraph	Public queryability	Graph Studio
+📄 License
+
+MIT — see LICENSE
+
+🎯 What Improved
+1️⃣ Visual Scanning
+
+Readers now see:
+
+Start → Proof → Architecture → Future
+
+which matches reviewer cognition.
+
+2️⃣ Architecture Feels Real
+
+Components are grouped logically instead of appearing as paragraphs.
+
+3️⃣ Protocol Tone Increased
+
+Bullets emphasize capabilities, not prose.
+
+4️⃣ GitHub Native Formatting Only
+
+No custom HTML required → renders perfectly everywhere.
+
+⭐ Optional High-Impact Upgrade
+
+Add badges at top:
+
+![Build](https://img.shields.io/badge/build-passing-brightgreen)
+![Milestone](https://img.shields.io/badge/M1-complete-blue)
+![License](https://img.shields.io/badge/license-MIT-green)

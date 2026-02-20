@@ -7,13 +7,16 @@ A deterministic knowledge protocol with on-chain provenance and atomic royalty s
 ## Start Here
 
 **Dependencies:** Node 20 · pnpm  
-(Details: [docs/troubleshooting.md](docs/troubleshooting.md))
+(Full troubleshooting and commands: **alexandrian-protocol-v2 docs** on Desktop.)  
+On Windows, protocol tests can hit a known Hardhat teardown; see troubleshooting there or run them in WSL/CI.
 
-**Full commands:** [docs/milestones/commands.md](docs/milestones/commands.md)
+**One command from scratch (clone → install deps → build → demo):**
 
 ```bash
-git clone https://github.com/alexandrian-protocol/alexandrian-protocol.git && cd alexandrian-protocol && pnpm install && pnpm build
+git clone https://github.com/alexandrian-protocol/alexandrian-protocol.git && cd alexandrian-protocol && pnpm start:here
 ```
+
+Already cloned? Run `pnpm start:here` (or step by step: `pnpm install && pnpm build && pnpm demo`).
 
 ---
 

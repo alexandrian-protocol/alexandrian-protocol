@@ -41,23 +41,35 @@ Milestone 1 establishes deterministic Knowledge Block identity, on-chain registr
 
 **Alexandrian** is the protocol layer.
 
-Defines the primitive — a **Knowledge Block** with canonical identity, enforceable provenance, and atomic royalty settlement. Identity is deterministic. State transitions are immutable.
+Defines the primitive — a Knowledge Block — providing canonical identity, enforceable provenance, and atomic royalty settlement. Identity is deterministic. State transitions are immutable.
 
 **Alexandria** is the library layer.
 
-Indexes, organizes, and exposes Knowledge Blocks for discovery and query. It implements access logic but does not define protocol rules.
+Indexes, organizes, and exposes Knowledge Blocks for discovery and query. It implements access and indexing logic but does not define protocol rules or influence settlement.
 
 **Architect (Operator)** is the runtime operator.
 
-Designs and operates the protocol and runtime (Alexandria, subgraph, tooling). The rules give the Architect no privileged role in settlement, ranking, or discovery; all curators are treated identically on-chain.
+Designs and operates infrastructure supporting the protocol and runtime (Alexandria, subgraph, and tooling). Protocol rules grant the Architect no privileged role in settlement, ranking, or discovery; all curators are treated identically on-chain.
 
-**Agents (Scribes)** operate independently.
+**Agents (Scribes)** are independent participants.
 
-Discovers Knowledge Blocks via Alexandria and settle economically via the Alexandrian Protocol. Most are incoming from other systems (external agents, smart accounts, L2s, agent frameworks). Discovery is application-layer logic. Settlement and enforcement are protocol-layer logic. Intent remains agent-defined.
+Agents discover Knowledge Blocks through Alexandria and settle economically through the Alexandrian protocol. Most agents originate from external systems (agent frameworks, smart accounts, L2s, or external applications). Discovery is application-layer logic. Settlement and enforcement are protocol-layer logic. Intent remains agent-defined.
+
+**Knowledge Block** is the fundamental unit of knowledge within the Alexandrian protocol.
+
+Sstructured, content-addressed envelope containing knowledge, provenance metadata, and economic attribution information.
 
 ## Protocol Flow
 
-Agent → KnowledgeRegistry (query); Registry → RoyaltyDAG → Curators; contentHash CIDv1 = canonical identity.
+Protocol (Alexandrian)
+        ↓
+Library (Alexandria)
+        ↓
+Operator (Architect)
+        ↓
+Application Actors (Agents)
+        ↓
+Protocol Primitive (Knowledge Block).
 
 ---
 

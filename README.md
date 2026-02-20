@@ -49,15 +49,15 @@ Milestone 1 establishes:
 
 ### Guarantees
 
-| Guarantee | Enforced By | Proof |
+| Milestone | Guarantee | Proof |
 |-----------|-------------|-------|
-| Deterministic kbId | Canonical serialization invariant | `pnpm test:spec` |
-| Stable contentHash + CIDv1 | Canonical byte derivation | `pnpm test:spec` |
+| Deterministic `kbId` derivation | Canonical serialization invariant | `pnpm test:spec` |
+| Stable `contentHash` + CIDv1 | Canonical byte derivation | `pnpm test:spec` |
 | Unique on-chain registration | KnowledgeRegistry immutability | `pnpm test:protocol` |
 | Atomic settlement (98/2) | Transaction-level execution | `pnpm test:protocol` |
 | Royalty propagation | RoyaltyDAG deterministic routing | `pnpm test:protocol` |
 | Schema validation | Graph integrity enforcement | `pnpm test:spec` |
-| Queryable lineage | Subgraph indexing | [subgraph/](subgraph/README.md) |
+| Queryable lineage | Subgraph indexing | [`subgraph/`](subgraph/) |
 
 ---
 

@@ -35,7 +35,7 @@ Milestone 1 establishes deterministic Knowledge Block identity, on-chain registr
 
 ---
 
-## Architecture
+## Components
 
 [docs/README.md](docs/README.md)
 

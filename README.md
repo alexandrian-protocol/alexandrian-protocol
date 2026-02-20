@@ -14,7 +14,7 @@ Architecture for deterministic knowledge: on-chain provenance, atomic royalty se
 
 ### One-command setup
 
-Run the block below for the full setup (clone → enter repo → install deps → build → demo). The third line, `pnpm start:here`, runs install, build, and demo.
+Run the block below for the full setup (clone → enter repo → install deps → build → demo).
 
 ```bash
 git clone https://github.com/alexandrian-protocol/alexandrian-protocol.git

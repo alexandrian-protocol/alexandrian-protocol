@@ -39,19 +39,23 @@ Milestone 1 establishes deterministic Knowledge Block identity, on-chain registr
 
 **Alexandrian** is the protocol layer.
 
-- It defines the primitive — a **Knowledge Block** with canonical identity, enforceable provenance, and atomic royalty settlement. Identity is deterministic. State transitions are immutable.
+- Defines the primitive — a **Knowledge Block** with canonical identity, enforceable provenance, and atomic royalty settlement. Identity is deterministic. State transitions are immutable.
 
 **Alexandria** is the library layer.
 
-- It indexes, organizes, and exposes Knowledge Blocks for discovery and query. It implements access logic but does not define protocol rules.
+- Indexes, organizes, and exposes Knowledge Blocks for discovery and query. It implements access logic but does not define protocol rules.
 
 **Agents** operate independently.
 
-- They discover Knowledge Blocks via Alexandria and settle economically via the Alexandrian Protocol. Discovery is application-layer logic. Settlement and enforcement are protocol-layer logic. Intent remains agent-defined.
+- Discovers Knowledge Blocks via Alexandria and settle economically via the Alexandrian Protocol. Discovery is application-layer logic. Intent remains agent-defined. Most are external agents, smart accounts, or frameworks.
 
-*Chart: Agent → KnowledgeRegistry (query); Registry → RoyaltyDAG → Curators; contentHash CIDv1 = canonical identity. Renders in GitHub README.*
+**Architect (operator)** is the runtime operator.
+
+- Designs and operates the protocol and runtime: deploys contracts, runs Alexandria and the subgraph, and maintains tooling and docs.
 
 **Protocol Flow**
+
+*Chart: Agent → KnowledgeRegistry (query); Registry → RoyaltyDAG → Curators; contentHash CIDv1 = canonical identity. Renders in GitHub README.*
 
 graph LR
   A[Agent] -->|query + payment| B[KnowledgeRegistry]

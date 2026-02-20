@@ -20,11 +20,11 @@ Section headers + minimal output (dot reporters).
 pnpm verify
 ```
 
-## Demo walkthrough (human-readable, for grant reviewers)
+## Demo walkthrough (human-readable, for milestone reviewers)
 
 **The only command needed for the M1 demo:** `pnpm demo:walkthrough`
 
-Full loop with verbose output — no dots; test names and results in plain language. Use before posting to testnet or grant submission. Run from repo root after `pnpm install` (script runs `pnpm build` first).
+Full loop with verbose output — no dots; test names and results in plain language. Use before posting to testnet or milestone submission. Run from repo root after `pnpm install` (script runs `pnpm build` first).
 
 ```bash
 pnpm demo:walkthrough

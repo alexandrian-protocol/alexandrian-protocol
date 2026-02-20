@@ -1,15 +1,15 @@
 ---
-description: Keep specs/*.md minimal and simplistic until content is complete
-globs: specs/**/*.md
+description: Keep docs/*.md minimal and simplistic until content is complete
+globs: docs/**/*.md
 alwaysApply: false
 ---
 
-# Specs markdown — minimal until complete
+# Docs markdown — minimal until complete
 
-When editing or creating files under `specs/**/*.md`:
+When editing or creating files under `docs/**/*.md`:
 
 - **Prefer short content:** Use bullet lists and one-line summaries instead of long paragraphs.
 - **Mark incomplete sections:** Use `TBD`, `(expand when complete)`, or a short placeholder instead of filling with filler.
 - **Optional status:** For draft specs, add at the top: `> **Status:** Draft. Sections may be TBD.`
 - **Expand later:** When a section is ready, replace placeholders with full prose and examples.
-- Avoid adding verbose explanations or repeated context; link to other specs or the main README instead.
+- Avoid adding verbose explanations or repeated context; link to other docs or the main README instead.

@@ -11,7 +11,7 @@ Contract deployment is in **packages/protocol**. From repo root:
 | Command | What it does |
 |--------|----------------|
 | `pnpm deploy:local` | Deploy Registry, Token, KYAStaking, EpochCommit to local Hardhat. Outputs to `packages/protocol/deployments/`. |
-| `pnpm deploy:testnet` | Deploy to testnet (e.g. Base Sepolia). Set RPC and deployer key; record addresses in [specs/TESTNET-ADDRESSES.md](../specs/TESTNET-ADDRESSES.md). |
+| `pnpm deploy:testnet` | Deploy to testnet (e.g. Base Sepolia). Set RPC and deployer key; record addresses in [docs/TESTNET-ADDRESSES.md](../docs/TESTNET-ADDRESSES.md). |
 | `pnpm deploy:docker` | Deploy from inside Docker stack: `docker compose -f docker/docker-compose.yml run --rm -e CHAIN_RPC_URL=http://blockchain:8545 blockchain npx hardhat run scripts/deploy.cjs --network docker`. |
 
 The actual deploy script is `packages/protocol/scripts/deploy.cjs` (or `.ts` if present).

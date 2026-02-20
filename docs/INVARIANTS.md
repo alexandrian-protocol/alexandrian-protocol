@@ -1,6 +1,6 @@
 # Protocol invariants
 
-What the protocol **always** enforces. Grant reviewers can rely on these.
+What the protocol **always** enforces. Milestone reviewers can rely on these.
 
 ---
 
@@ -26,4 +26,4 @@ What the protocol **always** enforces. Grant reviewers can rely on these.
 
 - **Code:** `packages/protocol/src/core/virtualRegistry/`, `packages/protocol/src/core/invariants/economic.ts`.
 - **Tests:** `tests/invariants/economic-invariants.test.ts`, `tests/unit/virtual-registry.test.ts`, `tests/performance/royalty-graph-scale.test.ts`.
-- **Spec:** [PROTOCOL-SPEC.md](PROTOCOL-SPEC.md), [ECONOMIC-ASSUMPTIONS.md](ECONOMIC-ASSUMPTIONS.md).
+- **Spec:** [PROTOCOL-SPEC.md](PROTOCOL-SPEC.md).

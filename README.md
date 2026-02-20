@@ -7,9 +7,9 @@ A deterministic knowledge protocol with on-chain provenance and atomic royalty s
 ## Start Here
 
 **Dependencies:** Node 20 · pnpm  
-(Details: [specs/TROUBLESHOOTING.md](specs/TROUBLESHOOTING.md))
+(Details: [docs/troubleshooting.md](docs/troubleshooting.md))
 
-**Full commands:** [specs/grants/COMMANDS.md](specs/grants/COMMANDS.md)
+**Full commands:** [docs/milestones/commands.md](docs/milestones/commands.md)
 
 ```bash
 git clone https://github.com/alexandrian-protocol/alexandrian-protocol.git && cd alexandrian-protocol && pnpm install && pnpm build
@@ -35,33 +35,33 @@ Milestone 1 establishes deterministic Knowledge Block identity, on-chain registr
 
 ## Architecture
 
-[specs/grants/FILE-STRUCTURE.md](specs/grants/FILE-STRUCTURE.md)
+[docs/README.md](docs/README.md)
 
 **Alexandrian** is the protocol layer.
 
-- Defines the primitive — a **Knowledge Block** with canonical identity, enforceable provenance, and atomic royalty settlement. Identity is deterministic. State transitions are immutable.
+It defines the primitive — a **Knowledge Block** with canonical identity, enforceable provenance, and atomic royalty settlement. Identity is deterministic. State transitions are immutable.
 
 **Alexandria** is the library layer.
 
-- Indexes, organizes, and exposes Knowledge Blocks for discovery and query. It implements access logic but does not define protocol rules.
-
-**Agents** operate independently.
-
-- Discovers Knowledge Blocks via Alexandria and settle economically via the Alexandrian Protocol. Discovery is application-layer logic. Intent remains agent-defined. Most are external agents, smart accounts, or frameworks.
+It indexes, organizes, and exposes Knowledge Blocks for discovery and query. It implements access logic but does not define protocol rules.
 
 **Architect (operator)** is the runtime operator.
 
-- Designs and operates the protocol and runtime: deploys contracts, runs Alexandria and the subgraph, and maintains tooling and docs.
+It designs and operates the protocol and runtime (Alexandria, subgraph, tooling). The rules give the Architect no privileged role in settlement, ranking, or discovery; all curators are treated identically on-chain.
+
+**Agents (Scribes)** operate independently.
+
+They discover Knowledge Blocks via Alexandria and settle economically via the Alexandrian Protocol. Most are incoming from other systems (external agents, smart accounts, L2s, agent frameworks). Discovery is application-layer logic. Settlement and enforcement are protocol-layer logic. Intent remains agent-defined.
 
 ## Protocol Flow
 
- Agent → KnowledgeRegistry (query); Registry → RoyaltyDAG → Curators; contentHash CIDv1 = canonical identity.
- 
+Agent → KnowledgeRegistry (query); Registry → RoyaltyDAG → Curators; contentHash CIDv1 = canonical identity.
+
 ---
 
 ## Milestone 2 — Epistemic Accountability
 
-[specs/m2/README.md](specs/m2/README.md)
+M2 is planned (slash/deprecation, query metrics, smart-account compatibility). See [docs/milestones/](docs/milestones/) for reviewer entry.
 
 Milestone 2 introduces economic consequence and measurable trust signals at the Knowledge Block layer.
 

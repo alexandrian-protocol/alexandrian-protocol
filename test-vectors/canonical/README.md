@@ -1,6 +1,6 @@
 # Canonical Test Vectors (Milestone 1)
 
-Formal spec: [specs/serialization-test-vectors.md](../../specs/serialization-test-vectors.md)
+Formal spec: [docs/PROTOCOL-SPEC.md](../../docs/PROTOCOL-SPEC.md)
 
 Content-addressed KBs: **no timestamp in the hash preimage**. Same content + same lineage → same `contentHash` / `kbId` regardless of curator or registration time.
 

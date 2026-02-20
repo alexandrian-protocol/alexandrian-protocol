@@ -69,7 +69,7 @@ Use these against your deployed subgraph endpoint (Studio Playground or your app
 
 ## Prerequisites
 
-- **Contract on Base Sepolia** — Deploy `KnowledgeRegistry` (or use existing). See [specs/TESTNET-ADDRESSES.md](../specs/TESTNET-ADDRESSES.md).
+- **Contract on Base Sepolia** — Deploy `KnowledgeRegistry` (or use existing). See [docs/TESTNET-ADDRESSES.md](../docs/TESTNET-ADDRESSES.md).
 - **ABI** — Compile protocol so the ABI exists:  
   `pnpm test:protocol` or `hardhat compile --config packages/protocol/hardhat.config.cjs` (from repo root).
 - **The Graph CLI** — `npm install -g @graphprotocol/graph-cli`

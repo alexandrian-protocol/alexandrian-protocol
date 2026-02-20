@@ -9,7 +9,7 @@
 - **Protocol** = core spec: canonical hashing, economic invariants, ledger math, Merkle proofs, VirtualRegistry, contracts. Lives in `packages/protocol` and in **local deterministic test helpers** under `tests/`.
 - **API** = runtime surface: Express server, env, ports, server lifecycle. Lives in `packages/api` (minimal stub in M1, full in M2).
 
-Grant reviewers care about the **core**. The API is a runtime detail.
+Milestone reviewers care about the **core**. The API is a runtime detail.
 
 ---
 

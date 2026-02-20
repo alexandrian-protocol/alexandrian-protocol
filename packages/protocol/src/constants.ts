@@ -12,6 +12,6 @@
  * Verification: grep codebase for FOUNDER, ARCHITECT — should return ZERO
  * results in settlement, ranking, or discovery logic.
  *
- * @see specs/INVARIANTS.md
+ * @see docs/INVARIANTS.md
  */
 export const PROTOCOL_NEUTRALITY = true as const;

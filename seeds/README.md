@@ -4,7 +4,7 @@ Real knowledge content that populates the Alexandrian archive for demos, grant r
 
 **Not test vectors.** Test vectors (`test-vectors/canonical/`) are synthetic and determinism-focused. Seeds are real KBs that tell a coherent story.
 
-See [specs/serialization-test-vectors.md](../specs/serialization-test-vectors.md) for the full spec.
+See [docs/PROTOCOL-SPEC.md](../docs/PROTOCOL-SPEC.md) for canonical serialization and [test-vectors/canonical/](../test-vectors/canonical/) for reference vectors.
 
 ## Seed count (20 total)
 

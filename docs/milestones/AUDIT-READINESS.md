@@ -104,7 +104,7 @@ How Alexandrian holds up against a nine-pillar protocol doctrine.
   - Explicit threats considered (e.g. parent spam, royalty-path inflation, 10k tiny KBs to game settlement, exponential DAG traversal).
   - What the protocol does **not** guarantee (e.g. cost of spam, reputation gaming, or Sybil beyond structural/economic invariants).
 
-**Recommendation:** Add `specs/THREAT-MODEL.md` (or a section in PROTOCOL-SPEC) listing assumed adversaries, in-scope threats, and out-of-scope assumptions. Even one page significantly raises protocol-grade credibility.
+**Recommendation:** Add `docs/THREAT-MODEL.md` (or a section in PROTOCOL-SPEC) listing assumed adversaries, in-scope threats, and out-of-scope assumptions. Even one page significantly raises protocol-grade credibility.
 
 ---
 
@@ -121,7 +121,7 @@ How Alexandrian holds up against a nine-pillar protocol doctrine.
   - Can collusion increase payout beyond what the DAG allows, or is it limited to what the DAG allows?
   - What is the intended story for reputation gaming (e.g. self-endorsement, Sybil)?
 
-**Recommendation:** Add `specs/ECONOMIC-ASSUMPTIONS.md` (or a section in PROTOCOL-SPEC) that states: what the protocol assumes about rational actors, what it tries to discourage (e.g. spam, parent inflation), and what remains out of scope (e.g. full Sybil resistance). This completes "economically sound under rational incentives" in a reviewer-visible way.
+**Recommendation:** Add `docs/ECONOMIC-ASSUMPTIONS.md` (or a section in PROTOCOL-SPEC) that states: what the protocol assumes about rational actors, what it tries to discourage (e.g. spam, parent inflation), and what remains out of scope (e.g. full Sybil resistance). This completes "economically sound under rational incentives" in a reviewer-visible way.
 
 ---
 
@@ -132,11 +132,11 @@ How Alexandrian holds up against a nine-pillar protocol doctrine.
 | 1. Invariant preservation      | Strong   | Enforced in code and tests; could add a single "invariants" manifest.|
 | 2. Deterministic core          | Aligned  | Identity and hashing are order- and timestamp-independent.           |
 | 3. Clear contract surface      | Strong   | Envelope, types, exports, ABI are stable and documented.              |
-| 4. Independent verifiability  | Strong   | Canonical hash, VirtualRegistry, economic math, on-chain settlement.  |
-| 5. Explicit failure semantics | Strong   | Fail-fast, clear errors, no silent skips.                            |
-| 6. Layer separation            | Strong   | Protocol is minimal core; consumers are layered.                     |
-| 7. Backward compatibility     | Strong   | Versioned spec, deprecation warnings, roadmap.                        |
-| 8. Adversarial model           | **Gap**  | Implicit in design; needs a short, explicit threat-model doc.         |
-| 9. Economic soundness          | **Gap**  | Structure supports soundness; needs explicit economic assumptions.   |
+| 4. Independent verifiability   | Strong   | Canonical hash, VirtualRegistry, economic math, on-chain settlement. |
+| 5. Explicit failure semantics  | Strong   | Fail-fast, clear errors, no silent skips.                             |
+| 6. Layer separation            | Strong   | Protocol is minimal core; consumers are layered.                      |
+| 7. Backward compatibility     | Strong   | Versioned spec, deprecation warnings, roadmap.                       |
+| 8. Adversarial model           | **Gap**  | Implicit in design; needs a short, explicit threat-model doc.          |
+| 9. Economic soundness          | **Gap**  | Structure supports soundness; needs explicit economic assumptions.    |
 
 **Verdict:** Alexandrian is strong on reliability, determinism, layering, failure clarity, and contract stability. To meet "protocol-grade" doctrine fully, the two missing pieces are: **(8) an explicit adversarial model** and **(9) explicit economic assumptions.** Adding concise, honest threat-model and economic-assumptions docs (or sections) closes that gap and makes the protocol's maturity and scope clear to reviewers.

@@ -10,7 +10,7 @@ The CJS build of Vite's Node API is deprecated. See https://vite.dev/...
 
 **Cause:** Vitest loads Vite’s Node API; that single line is a deprecation notice, not a test failure.
 
-**Impact:** None. Tests run and pass. For grant review or CI, treat the run as successful if the test summary shows all passed. (Future: we may upgrade to an ESM-only Vitest/Vite setup to remove the line.)
+**Impact:** None. Tests run and pass. For milestone review or CI, treat the run as successful if the test summary shows all passed. (Future: we may upgrade to an ESM-only Vitest/Vite setup to remove the line.)
 
 ---
 
@@ -44,7 +44,7 @@ This is a known Node.js/libuv teardown issue on Windows. Hardhat has patched Win
 
 **Note:** Hardhat 2 does not accept Mocha’s `--exit` flag (HH305). We set `mocha: { exit: true }` in `packages/protocol/hardhat.config.cjs` so Mocha exits after tests; that may reduce the teardown window but does not always prevent the Windows assertion. If the crash persists, use Node 22 LTS or WSL. Contract tests can also be run in CI (Linux), which does not hit this Windows-specific assertion.
 
-**For grant review:** If protocol tests *passed* and then the assertion appears, the run is still a success—the failure is in Node’s teardown, not in the protocol. Run `pnpm test:protocol` in WSL or rely on CI for clean output with zero assertion lines.
+**For milestone review:** If protocol tests *passed* and then the assertion appears, the run is still a success—the failure is in Node’s teardown, not in the protocol. Run `pnpm test:protocol` in WSL or rely on CI for clean output with zero assertion lines.
 
 ---
 

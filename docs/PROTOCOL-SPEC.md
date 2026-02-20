@@ -16,8 +16,8 @@ See [packages/protocol/docs/API.md](../packages/protocol/docs/API.md) for export
 
 ## Adversarial and economic scope
 
-- **Threat model:** [THREAT-MODEL.md](THREAT-MODEL.md) — who we assume can attack, what we protect against, what we don’t.
-- **Economic assumptions:** [ECONOMIC-ASSUMPTIONS.md](ECONOMIC-ASSUMPTIONS.md) — invariants we enforce, intended properties (spam, parent inflation), and what we do not claim (Sybil, optimal fees).
+- **Threat model:** To be added in docs (who we assume can attack, what we protect against, what we don’t).
+- **Economic assumptions:** To be added in docs (invariants we enforce, intended properties, what we do not claim).
 
 ## Test conformance
 

@@ -150,6 +150,6 @@ console.log(B);
 console.log("");
 console.log("   Next: Testnet");
 console.log("   Set BASE_SEPOLIA_RPC_URL and PRIVATE_KEY, then: pnpm deploy:testnet");
-console.log("   Record addresses in specs/TESTNET-ADDRESSES.md");
+console.log("   Record addresses in docs/TESTNET-ADDRESSES.md");
 console.log("");
 console.log(B + "\n");

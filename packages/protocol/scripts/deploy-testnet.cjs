@@ -96,7 +96,7 @@ async function main() {
   console.log(`  REGISTRY_ADDRESS=${registryAddress}`);
   console.log(`  CHAIN_RPC_URL=${hre.network.config.url}`);
   console.log(`  DEPLOYER_ADDRESS=${deployer.address}`);
-  console.log("\n  Update specs/TESTNET-ADDRESSES.md with both addresses.");
+  console.log("\n  Update docs/TESTNET-ADDRESSES.md with both addresses.");
   console.log("  Subgraph: confirm startBlock in subgraph/subgraph.yaml (must be actual deploy block, not 0).");
   console.log("  Then: pnpm subgraph:deploy (or codegen + build + graph deploy --studio <slug>).");
   const chainId = Number(hre.network.config.chainId);

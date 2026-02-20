@@ -46,7 +46,7 @@ Deploys:
 
 **After deploy:**
 
-1. Copy printed addresses into [specs/TESTNET-ADDRESSES.md](TESTNET-ADDRESSES.md).
+1. Copy printed addresses into [TESTNET-ADDRESSES.md](TESTNET-ADDRESSES.md).
 2. The deploy script writes **KnowledgeRegistry** address and **startBlock** into `subgraph/subgraph.yaml`. **Confirm** `startBlock` is the actual deploy block (not 0) before subgraph deploy — wrong startBlock means the subgraph indexes nothing or syncs for hours.
 3. Run `pnpm subgraph:codegen`, `pnpm subgraph:build`, then deploy (see step 3).
 

@@ -12,4 +12,4 @@ All notable changes to the Alexandrian Protocol are documented here.
 - **Subgraph** — The Graph: schema and mappings for KnowledgeRegistry on Base Sepolia; indexes KB registrations and lineage. Codegen and build pass; deploy via `pnpm subgraph:deploy` with env-set key and slug.
 - **Proof of execution** — `pnpm test` (protocol + spec + integration) and `pnpm demo` / `pnpm demo:walkthrough` demonstrate end-to-end: create KB → determinism → register → subgraph-ready event. CI (GitHub Actions) runs build and full test suite on push/PR.
 
-Maintained protocol with a history; see [specs/M1-DEMO.md](specs/M1-DEMO.md) and [specs/grants/](specs/grants/) for reviewers.
+Maintained protocol with a history; see [docs/M1-DEMO.md](docs/M1-DEMO.md) and [docs/milestones/](docs/milestones/) for reviewers.

@@ -1,6 +1,6 @@
 # @alexandrian/protocol
 
-**Implements**: [PROTOCOL-SPEC v2.0.0](../../specs/PROTOCOL-SPEC.md)
+**Implements**: [PROTOCOL-SPEC v2.0.0](../../docs/PROTOCOL-SPEC.md)
 
 ## Structure
 
@@ -24,7 +24,7 @@ packages/protocol/
 
 Canonical Knowledge Block types, schemas, and validation logic.
 
-This spec work positions you well for grants because it shows:
+This spec work positions you well for milestones because it shows:
 
 - Formal invariants documented
 - Test coverage for edge cases (cycles, duplicates, self-reference)

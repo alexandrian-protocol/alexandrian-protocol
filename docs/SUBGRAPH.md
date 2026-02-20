@@ -43,11 +43,11 @@ List Knowledge Blocks (most recent first):
 
 **What you get:** 20 seed KBs registered on testnet; roots have `parentCount: 0`, derived KBs have `parents` pointing to parent contentHashes (lineage).
 
-**Single KB by id (contentHash):**
+**Single KB by id (contentHash):** Replace `<contentHash>` with a kbId (0x-prefixed hex from registry or subgraph list).
 
 ```graphql
 {
-  knowledgeBlock(id: "0x1c90ab1e60e4ed3cf38c822586cb03dd8af26ac47b5166cf047e23a95850b812") {
+  knowledgeBlock(id: "<contentHash>") {
     id
     curator
     artifactType

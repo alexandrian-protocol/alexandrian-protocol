@@ -25,7 +25,7 @@ Then: `pnpm test:spec` or **`pnpm verify`** (full check: build + tests + demo).
 | Contract tests | `pnpm test:protocol` |
 | Deploy local | `pnpm deploy:local` |
 
-Full command list and troubleshooting: see **alexandrian-protocol-v2 docs** on Desktop.
+Full command list and troubleshooting: see [CONTRIBUTING](../../CONTRIBUTING.md).
 
 ---
 

@@ -18,4 +18,4 @@ Short checklist and troubleshooting so reviewers get a smooth first run.
 - **Hardhat crash on Windows (UV_HANDLE_CLOSING)** — CI runs on Linux and is unaffected. If tests *passed* and then the assertion appears, the run is still a success.
 - **One-line Vite CJS deprecation** — If you see "The CJS build of Vite's Node API is deprecated," it’s harmless. Tests are unaffected.
 
-Full troubleshooting and command list: **alexandrian-protocol-v2 docs** on Desktop.
+Full troubleshooting and command list: see [CONTRIBUTING](../../CONTRIBUTING.md).

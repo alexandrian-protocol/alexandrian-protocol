@@ -9,13 +9,13 @@ Set these on GitHub so the repo is discoverable and clear at a glance.
 **Suggested text (short):**
 
 ```
-Deterministic knowledge protocol with on-chain provenance and atomic royalty settlement. Knowledge Blocks: canonical identity, registry, subgraph. M1 complete; M2 planned.
+Architecture for deterministic knowledge: on-chain provenance, atomic royalty settlement, Knowledge Block primitive (Alexandrian protocol + Alexandria library). M1 complete; M2 planned.
 ```
 
 **Shorter option (≤ 100 chars):**
 
 ```
-Knowledge protocol: canonical KB identity, on-chain registry, atomic settlement. M1 complete.
+Deterministic knowledge: on-chain provenance, atomic settlement, KB primitive. M1 complete.
 ```
 
 Pick one or edit to fit the 350-character limit.

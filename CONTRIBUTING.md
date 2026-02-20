@@ -8,6 +8,8 @@
 
 See [README.md](README.md) and [docs/milestones/](docs/milestones/) for reviewer entry and commands.
 
+**Dev/ops runbooks:** Troubleshooting, full command list, e2e runbook, scripts, and docker runbooks are maintained off-repo. Ask maintainers for access.
+
 ## Submitting changes
 
 1. Open an issue or pick an existing one.

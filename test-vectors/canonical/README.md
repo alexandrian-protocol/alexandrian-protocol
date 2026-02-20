@@ -36,7 +36,7 @@ Content-addressed KBs: **no timestamp in the hash preimage**. Same content + sam
 
 ## Usage
 
-- **Ingestion / SDK:** Use `@alexandrian/protocol` `contentHashFromEnvelope(envelope)` and `cidV1FromEnvelope(envelope)` (envelope = camelCase; `sortSources()` applied internally).
+- **Ingestion / SDK:** Use `@alexandrian/protocol` `contentHashFromEnvelope(envelope)` and `cidV1FromEnvelope(envelope)` (envelope = camelCase; `sortSources()` is applied during canonicalization).
 - **Regression:** Load `envelope.json`, compute hash, assert `=== expected.contentHash`.
 - **Spec conformance:** Run `pnpm test:spec` to execute canonical and invariant conformance tests (no API, blockchain, or LLM required).
 

@@ -2,7 +2,7 @@
 
 Protocol and project documentation. **Reviewer entry:** [milestones/](milestones/) — what to run, what to read.
 
-Dev/ops docs (troubleshooting, full command list, e2e runbook) are in **alexandrian-protocol-v2 docs** on Desktop.
+Dev/ops runbooks (troubleshooting, commands, e2e) are maintained separately; see [CONTRIBUTING](../CONTRIBUTING.md).
 
 ---
 

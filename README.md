@@ -1,6 +1,6 @@
 # Alexandria
 
-A deterministic knowledge protocol with on-chain provenance and atomic royalty settlement.
+Architecture for deterministic knowledge: on-chain provenance, atomic royalty settlement, and the Knowledge Block primitive (Alexandrian protocol + Alexandria library + infrastructure + agents).
 
 ---
 

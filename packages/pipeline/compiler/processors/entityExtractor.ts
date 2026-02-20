@@ -16,9 +16,8 @@
  *   DATE        — Temporal references
  *   METRIC      — Quantitative values with units
  *
- * For production: swap extractEntities() internals for a proper NER model
- * (spaCy via Python bridge, Hugging Face NER, or OpenAI function calling)
- * — the interface is identical.
+ * To use a different NER backend, swap the implementation
+ * (e.g. spaCy, Hugging Face NER); the interface is unchanged.
  */
 
 export type EntityType =
